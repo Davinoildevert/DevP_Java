@@ -1,127 +1,52 @@
 # DevP_Java
 
-Restaurant Console Project
-Description
-
-This application is a small restaurant ordering system designed for an interactive kiosk or console. The application allows customers to browse the menu by category, customise dishes, add items to a cart, modify the cart, and confirm an order. A JavaFX front‑end communicates with a Javalin REST back‑end, and the modelling of the business domain is done with Modelio.
-
-Features
-
-Browse categories: display the available categories (Entrées, Plats, Desserts, Boissons) and filter the menu by category
-newtab
-.
-
-Dish details: show mandatory information for each dish – name, price, description, pictogram(s), category and availability
-newtab
-.
-
-Add to cart and choose quantity: users can add a dish to their cart and select the quantity
-newtab
-.
-
-Personalisation: certain dishes can be personalised (e.g., spice level, accompaniment, drink)
-newtab
-.
-
-View and modify cart: the cart can be consulted and modified at any time during navigation
-newtab
-.
-
-Order confirmation: a final recap shows the contents of the order and the user can confirm it, generating an order number
-newtab
-.
-
-Optional client association: the order can optionally be associated with a customer name or identifier.
+Console de restaurant Description du projet
+Cette application est un petit système de commande pour restaurant conçu pour une borne interactive ou une console. Elle permet aux clients de parcourir le menu par catégorie, de personnaliser les plats, d'ajouter des articles à leur panier, de modifier leur panier et de confirmer leur commande. Une interface JavaFX communique avec un backend Javalin REST, et la modélisation du domaine métier est réalisée avec Modelio.
+Fonctionnalités
+Parcourir les catégories : afficher les catégories disponibles (Entrées, Plats, Desserts, Boissons) et filtrer le menu par catégorie newtab .
+Détails des plats : afficher les informations obligatoires pour chaque plat – nom, prix, description, pictogramme(s), catégorie et disponibilité newtab .
+Ajouter au panier et choisir la quantité : les utilisateurs peuvent ajouter un plat à leur panier et sélectionner la quantité newtab .
+Personnalisation : certains plats peuvent être personnalisés (par exemple, niveau d'épices, accompagnement, boisson) newtab .
+Afficher et modifier le panier : le panier peut être consulté et modifié à tout moment pendant la navigation newtab .
+Confirmation de la commande : un récapitulatif final affiche le contenu de la commande et l'utilisateur peut la confirmer, générant ainsi un numéro de commande newtab .
+Association facultative au client : la commande peut être associée de manière facultative à un nom ou à un identifiant client.
 
 Architecture
+Le projet suit une architecture client/serveur :
+Client – une application JavaFX fournissant l'interface utilisateur, gérant la navigation et la gestion locale du panier, et communiquant avec le serveur via l'API HTTP REST.
+Serveur : une API REST basée sur Javalin qui expose des points de terminaison pour récupérer les catégories et les plats, recevoir les soumissions de panier, valider les commandes et stocker les données newtab .
+Modèle : le modèle de domaine UML est conçu avec Modelio et exporté dans le répertoire /modelio. Il définit des classes telles que Categorie, Plat, Panier, LignePanier, Commande, LigneCommande et Personnalisation.
+Aperçu des cas d'utilisation Rôle de l'utilisateur Cas d'utilisation Visiteur Parcourir le menu, filtrer par catégorie, afficher les détails des plats, ajouter au panier, personnaliser les options des plats, modifier les quantités, afficher le récapitulatif et confirmer la commande Personnel (facultatif) Gérer la liste des plats et des catégories, mettre à jour la disponibilité, afficher les commandes confirmées Modélisation UML
+Un diagramme de classes initial doit être créé dans Modelio et contenir au moins les classes suivantes :
+Catégorie – libellé et icône (par exemple, entrée, plat principal, dessert, boisson).
+Plat – nom, description, prix, catégorie, pictogramme(s), disponibilité.
+Personnalisation – informations sur la personnalisation (niveau d'épices, accompagnement, boisson, etc.) associée à un plat.
+Panier – ensemble de LignePanier pouvant être modifié par l'utilisateur.
 
-The project follows a client/server architecture:
-
-Client – a JavaFX application providing the user interface, handling navigation and local cart management, and communicating with the server via HTTP REST API.
-
-Server – a Javalin‑based REST API that exposes endpoints for retrieving categories and dishes, receiving cart submissions, validating orders, and storing data
-newtab
-.
-
-Model – the UML domain model is designed with Modelio and exported into the /modelio directory. It defines classes such as Categorie, Plat, Panier, LignePanier, Commande, LigneCommande and Personnalisation.
-
-Use‑case overview
-User role	Use cases
-Visitor	Browse the menu, filter by category, view dish details, add to cart, personalise dish options, modify quantities, view the recap and confirm the order
-Staff (optional)	Manage the list of dishes and categories, update availability, view confirmed orders
-UML Modélisation
-
-An initial class diagram should be built in Modelio containing at least the following classes:
-
-Categorie – label and icon (e.g. entrée, plat principal, dessert, boisson).
-
-Plat – name, description, price, category, pictogram(s), availability.
-
-Personnalisation – information about customisation (spice level, accompaniment, drink, etc.) associated with a dish.
-
-Panier – a collection of LignePanier that can be modified by the user.
-
-LignePanier – association between a dish and its current quantity in the cart, with an optional personalisation.
-
-Commande – order number, date, total and list of LigneCommande. Created when the cart is validated.
-
-LigneCommande – dish, quantity and unit price fixed at the moment of order.
-
-This diagram should be exported (image or XMI) into the /modelio directory. A simple use‑case diagram should illustrate the main actions (browse menu, add to cart, personalise, consult cart, confirm order).
-
-Repository structure
-/client/            # JavaFX client application
-/server/            # Javalin REST server application
-/modelio/           # UML model and exported diagrams
-README.md           # This file
-
-
-Each directory has its own build system. The repository must respect the structure and naming conventions stipulated in the delivery requirements
-newtab
-.
-
-Branches and contributions
-
-The repository uses Git for version control
-newtab
-. The recommended workflow is:
-
-Create one branch per team member (e.g. model, metier, ui, api) to allow parallel work without conflicts.
-
-Do not work directly on main. Merge changes via pull requests once they have been reviewed.
-
-Commit early and often; use descriptive commit messages.
-
-Prerequisites
-
-Java 17 or 21 JDK installed.
-
+LignePanier – association entre un plat et sa quantité actuelle dans le panier, avec une personnalisation facultative.
+Commande – numéro de commande, date, total et liste de LigneCommande. Créée lorsque le panier est validé.
+LigneCommande – plat, quantité et prix unitaire fixés au moment de la commande.
+Ce diagramme doit être exporté (image ou XMI) dans le répertoire /modelio. Un diagramme de cas d'utilisation simple doit illustrer les principales actions (parcourir le menu, ajouter au panier, personnaliser, consulter le panier, confirmer la commande).
+Structure du référentiel /client/ # Application client JavaFX /server/ # Application serveur REST Javalin /modelio/ # Modèle UML et diagrammes exportés README.md # Ce fichier
+Chaque répertoire dispose de son propre système de compilation. Le référentiel doit respecter la structure et les conventions de nommage stipulées dans les exigences de livraison newtab .
+Branches et contributions
+Le référentiel utilise Git pour le contrôle de version newtab . Le workflow recommandé est le suivant :
+Créez une branche par membre de l'équipe (par exemple, modèle, métier, interface utilisateur, API) afin de permettre un travail parallèle sans conflit.
+Ne travaillez pas directement sur la branche principale. Fusionnez les modifications via des pull requests une fois qu'elles ont été révisées.
+Commitez tôt et souvent ; utilisez des messages de commit descriptifs.
+Prérequis
+Java 17 ou 21 JDK installé.
 JavaFX 17+.
+Maven ou Gradle pour construire le client et le serveur.
+Modelio – la version spécifiée dans les instructions du projet pour éditer et exporter le modèle UML.
 
-Maven or Gradle for building the client and server.
-
-Modelio – the version specified in the project instructions for editing and exporting the UML model.
-
-Getting started
-
-Clone the repository:
-
-git clone <repository-url>
-cd <repository-folder>
-
-
-Create your working branch: git checkout -b model (or metier, ui, api, etc.).
-
-Model: open the model file in /modelio with Modelio, adjust the classes if necessary and export the diagram. Commit the updated model in the same directory.
-
-Server: in /server, initialise a Javalin project (Maven or Gradle) and create the REST endpoints defined in the UML model. Implement data storage, order number generation and validation logic.
-
-Client: in /client, initialise a JavaFX project. Develop the screens (home, category selection, dish list, dish details, cart/recap, confirmation) and interact with the server via the REST API.
-
-Test locally: run both the server and the client locally and verify that the full flow works (this is part of the non‑functional requirement “exécution locale autonome”
-newtab
-).
-
+Pour commencer
+Clonez le référentiel :
+git clone cd
+Créez votre branche de travail : git checkout -b model (ou metier, ui, api, etc.).
+Modèle : ouvrez le fichier modèle dans /modelio avec Modelio, ajustez les classes si nécessaire et exportez le diagramme. Validez le modèle mis à jour dans le même répertoire.
+Serveur : dans /server, initialisez un projet Javalin (Maven ou Gradle) et créez les points de terminaison REST définis dans le modèle UML. Implémentez le stockage des données, la génération des numéros de commande et la logique de validation.
+Client : dans /client, initialisez un projet JavaFX. Développez les écrans (accueil, sélection de catégorie, liste des plats, détails des plats, panier/récapitulatif, confirmation) et interagissez avec le serveur via l'API REST.
+Testez localement : exécutez le serveur et le client localement et vérifiez que le flux complet fonctionne (cela fait partie de l'exigence non fonctionnelle « exécution locale autonome » newtab ).
 Licence
-
-This is an academic project; a licence may be specified by your instructor. Until then, treat it as internal/unlicensed.
+Il s'agit d'un projet académique ; une licence peut être spécifiée par votre instructeur. Jusqu'à ce moment-là, considérez-le comme interne/sans licence.
