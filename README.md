@@ -41,6 +41,76 @@ Il est consommé par un **client JavaFX** simulant une borne de commande tactile
 mvn clean install
 mvn exec:java
 
+frontend
+├── src
+│ └── main
+│ └── java
+│ └── com.example
+│ ├── views
+│ └── App.java
+├── styles.css
+└── README.md
+
+
+---
+
+### README FRONTEND 
+
+```md
+#  Console de restaurant – Frontend (JavaFX)
+
+##  Description
+Ce dépôt contient le **client JavaFX** simulant une borne de commande tactile pour un restaurant asiatique.
+
+L’application permet au client de :
+- parcourir le menu par catégorie
+- consulter les plats
+- ajouter et modifier un panier
+- confirmer une commande
+
+Le frontend communique avec une **API REST Javalin**.
+
+---
+
+##  Fonctionnalités
+- Écran d’accueil
+- Sélection des catégories
+- Liste et détail des plats
+- Panier avec modification des quantités
+- Confirmation de commande avec numéro
+
+---
+
+##  Technologies
+- Java 17
+- JavaFX
+- CSS JavaFX
+- API REST (HTTP / JSON)
+
+---
+
+##  Lancement
+
+### Prérequis
+- Java 17+
+- Backend lancé sur `localhost:7070`
+
+### Exécution
+Lancer la classe `App.java` depuis l’IDE.
+
+---
+
+##  Conception
+- Interface adaptée à une borne tactile
+- Résolution cible : **1920×1080**
+- Séparation vue / logique métier
+
+---
+
+##  Projet pédagogique
+Groupe : **DevP_Java**
+
+
 
 
  
