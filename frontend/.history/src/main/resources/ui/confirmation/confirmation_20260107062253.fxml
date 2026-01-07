@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.ui.ConfirmationController"
+            prefWidth="1920" prefHeight="1080"
+            styleClass="screen">
+
+    <center>
+        <VBox alignment="CENTER" spacing="18">
+            <Label text="Confirmation de commande" styleClass="titleBig"/>
+            <Label text="Merci pour votre commande !" styleClass="subtitle"/>
+
+            <Label fx:id="orderLabel" text="Commande N° #1234" styleClass="orderNumber"/>
+
+            <VBox fx:id="recapBox" styleClass="recapBox">
+                <!-- rempli par le controller -->
+            </VBox>
+
+            <Label fx:id="totalLabel" text="Total 0,00 €" styleClass="totalBig"/>
+
+            <Label text="Veuillez patienter, votre commande est en préparation" styleClass="subtitle"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER">
+            <padding>
+                <Insets top="0" right="0" bottom="28" left="0"/>
+            </padding>
+            <Button text="Nouvelle commande" styleClass="ctaSmall" onAction="#onNewOrder"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

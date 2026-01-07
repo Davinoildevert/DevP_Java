@@ -1,0 +1,236 @@
+.screen {
+    -fx-background-color: linear-gradient(to bottom right, #0B0F14, #111827);
+    -fx-font-family: "Segoe UI";
+}
+
+.brand {
+    -fx-font-size: 56px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #F8FAFC;
+}
+
+.subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: rgba(248,250,252,0.75);
+}
+
+.cta {
+    -fx-font-size: 40px;
+    -fx-font-weight: 900;
+    -fx-padding: 22 46;
+    -fx-background-radius: 22;
+    -fx-background-color: linear-gradient(to right, #F5C542, #F0B429);
+    -fx-text-fill: #0B0F14;
+}
+
+.ghost {
+    -fx-font-size: 18px;
+    -fx-padding: 12 24;
+    -fx-background-radius: 16;
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-text-fill: #F8FAFC;
+    -fx-border-color: rgba(255,255,255,0.15);
+    -fx-border-radius: 16;
+}
+.overlay {
+    -fx-background-color: rgba(0,0,0,0.35);
+}
+
+.langBtn, .helpBtn {
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+    -fx-padding: 10 22;
+    -fx-background-radius: 14;
+    -fx-background-color: rgba(255,255,255,0.12);
+    -fx-text-fill: #F8FAFC;
+    -fx-border-color: rgba(255,255,255,0.18);
+    -fx-border-radius: 14;
+}
+
+.langBtn:hover, .helpBtn:hover {
+    -fx-background-color: rgba(255,255,255,0.18);
+}
+
+.langBtn:pressed, .helpBtn:pressed {
+    -fx-opacity: 0.9;
+    -fx-translate-y: 1;
+}
+.langBtn, .helpBtn {
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+    -fx-padding: 10 22;
+    -fx-background-radius: 14;
+    -fx-background-color: rgba(255,255,255,0.15);
+    -fx-text-fill: #F8FAFC;
+    -fx-border-color: rgba(255,255,255,0.25);
+    -fx-border-radius: 14;
+}
+
+/*  Bouton actif (jaune) */
+.langBtn.active, .helpBtn.active {
+    -fx-background-color: linear-gradient(to right, #F5C542, #F0B429);
+    -fx-text-fill: #0B0F14;
+    -fx-border-color: transparent;
+}
+.productCard {
+    -fx-background-color: rgba(255,255,255,0.90);
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-border-color: rgba(0,0,0,0.08);
+}
+
+.thumb {
+    -fx-arc-width: 18;
+    -fx-arc-height: 18;
+    -fx-fill: rgba(0,0,0,0.12);
+}
+
+.productName {
+    -fx-font-size: 26px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #0B0F14;
+}
+
+.productPrice {
+    -fx-font-size: 42px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #0B0F14;
+}
+
+.addBtn {
+    -fx-font-size: 18px;
+    -fx-font-weight: 800;
+    -fx-padding: 10 18;
+    -fx-background-radius: 14;
+    -fx-background-color: rgba(0,0,0,0.08);
+}
+.cartTotalBtn {
+    -fx-background-color: #F5C542;   /* jaune */
+    -fx-text-fill: #111;
+    -fx-font-size: 18px;
+    -fx-font-weight: 800;
+
+    -fx-padding: 10 18 10 18;        /* espace intérieur */
+    -fx-background-radius: 14;
+
+    -fx-border-color: rgba(0,0,0,0.18);
+    -fx-border-radius: 14;
+
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.2, 0, 2);
+}
+
+.cartTotalBtn:hover {
+    -fx-background-color: #FFD65A;
+}
+.tab {
+    -fx-background-color: #F2F2F2;
+    -fx-text-fill: #111;
+    -fx-font-size: 16px;
+    -fx-font-weight: 600;
+
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 10;
+
+    -fx-border-color: rgba(0,0,0,0.15);
+    -fx-border-radius: 10;
+
+    -fx-cursor: hand;
+}
+
+.tab:hover {
+    -fx-background-color: #E6E6E6;
+}
+
+.tab.active {
+    -fx-background-color: #F5C542; /* JAUNE */
+    -fx-text-fill: #111;
+    -fx-font-weight: 800;
+}
+.button.addBtn {
+    -fx-background-color: #DADADA;
+    -fx-text-fill: #111;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+
+    -fx-padding: 6 18 6 18;
+    -fx-background-radius: 20;
+
+    -fx-cursor: hand;
+}
+
+.button.addBtn:hover {
+    -fx-background-color: #CFCFCF;
+}
+
+.button.addBtn:pressed {
+    -fx-background-color: #BEBEBE;
+}
+.ghostBtn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #EEE;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+
+    -fx-padding: 8 18 8 18;
+    -fx-border-color: rgba(255,255,255,0.4);
+    -fx-border-radius: 10;
+
+    -fx-cursor: hand;
+}
+
+.ghostBtn:hover {
+    -fx-background-color: rgba(255,255,255,0.08);
+}
+.ctaSmall {
+    -fx-background-color: #F5C542;
+    -fx-text-fill: #111;
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 12;
+
+    -fx-cursor: hand;
+}
+.ctaSmall {
+    -fx-background-color: #F5C542;
+    -fx-text-fill: #111;
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 12;
+
+    -fx-cursor: hand;
+}
+/* Force le style UNIQUEMENT sur les boutons Ajouter */
+.button.addBtn {
+    -fx-background-color: #F5C542 !important;
+    -fx-text-fill: #111 !important;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+
+    -fx-padding: 10 26 10 26;
+    -fx-background-radius: 20;
+
+    -fx-cursor: hand;
+}
+
+.button.addBtn:hover {
+    -fx-background-color: #FFD65A !important;
+}
+
+.button.addBtn:pressed {
+    -fx-background-color: #E6B93A !important;
+}
+.toast {
+    -fx-background-color: rgba(0,0,0,0.78);
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+    -fx-padding: 14 18;
+    -fx-background-radius: 14;
+    -fx-translate-y: -35;
+}

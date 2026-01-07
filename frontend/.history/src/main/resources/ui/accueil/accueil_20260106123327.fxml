@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.ui.AccueilController"
+           prefWidth="1920" prefHeight="1080">
+
+    <!-- BACKGROUND SLIDESHOW -->
+    <ImageView fx:id="bgImage1" fitWidth="1920" fitHeight="1080" preserveRatio="false"/>
+    <ImageView fx:id="bgImage2" fitWidth="1920" fitHeight="1080" preserveRatio="false"/>
+
+    <!-- DARK OVERLAY (lisibilité) -->
+    <StackPane styleClass="overlay"/>
+
+    <!-- CONTENT -->
+    <VBox alignment="CENTER" spacing="25">
+        <Label text="Asiatik Express" styleClass="brand"/>
+        <Button text="TOUCHEZ POUR COMMENCER" styleClass="cta"/>
+        <Label text="Commandez vos plats en quelques étapes" styleClass="subtitle"/>
+    </VBox>
+
+</StackPane>

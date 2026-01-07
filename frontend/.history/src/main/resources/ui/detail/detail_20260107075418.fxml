@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="root"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.ui.DetailController"
+            prefWidth="1920" prefHeight="1080"
+            style="-fx-background-color: white;">
+
+    <!-- Top -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16">
+            <padding><Insets top="18" right="22" bottom="8" left="22"/></padding>
+
+            <!-- ✅ Flèche : retour catalogue -->
+            <Button text="←" onAction="#onBackCatalogue"
+                    style="-fx-font-size: 18px; -fx-background-color: transparent;"/>
+
+            <Label text="Détail du plat"
+                   style="-fx-font-size: 34px; -fx-font-weight: 900;"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="cartTotalBtn"
+                    text="🧺  0,00 €"
+                    onAction="#onOpenPanier"
+                    style="-fx-background-color: #fbc02d;
+                           -fx-font-weight: 800;
+                           -fx-background-radius: 18;
+                           -fx-padding: 10 18;"/>
+        </HBox>
+    </top>
+
+    <!-- Center -->
+    <center>
+        <HBox spacing="28">
+            <padding><Insets top="14" right="40" bottom="14" left="40"/></padding>
+
+            <!-- ✅ Image (placeholder) -->
+            <StackPane prefWidth="520" prefHeight="360"
+                       style="-fx-background-color: #d9d9d9; -fx-background-radius: 12;">
+                <Label text="image plat" style="-fx-text-fill: #666; -fx-font-size: 16px;"/>
+            </StackPane>
+
+            <!-- Infos -->
+            <VBox spacing="14" prefWidth="850">
+
+                <!-- ✅ Nom piloté par controller -->
+                <Label fx:id="nameLabel"
+                       text="Pad Thaï crevettes"
+                       style="-fx-font-size: 36px; -fx-font-weight: 900;"/>
+
+                <!-- ✅ Description pilotée par controller -->
+                <Label fx:id="descLabel"
+                       text="Nouilles sautées avec crevettes, légumes et sauce tamarin"
+                       wrapText="true"
+                       style="-fx-font-size: 20px; -fx-text-fill: #666;"/>
+
+                <!-- ✅ Prix piloté par controller (réduit) -->
+                <Label fx:id="priceLabel"
+                       text="14,90 €"
+                       style="-fx-font-size: 34px; -fx-font-weight: 900;"/>
+
+                <Label text="Options" style="-fx-font-size: 28px; -fx-font-weight: 900;"/>
+
+                <!-- Epice -->
+                <VBox spacing="6">
+                    <Label text="Épice : doux / moyen / fort" style="-fx-font-size: 18px;"/>
+                    <HBox spacing="16">
+                        <RadioButton fx:id="rbDoux" text="Doux" toggleGroup="$tgEpice"/>
+                        <RadioButton fx:id="rbMoyen" text="Moyen" toggleGroup="$tgEpice" selected="true"/>
+                        <RadioButton fx:id="rbFort" text="Fort" toggleGroup="$tgEpice"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Accompagnement -->
+                <VBox spacing="6">
+                    <Label text="Accompagnement : riz / nouilles" style="-fx-font-size: 18px;"/>
+                    <HBox spacing="16">
+                        <RadioButton fx:id="rbRiz" text="Riz" toggleGroup="$tgAcc" selected="true"/>
+                        <RadioButton fx:id="rbNouilles" text="Nouilles" toggleGroup="$tgAcc"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Quantité + CTA -->
+                <HBox alignment="CENTER_LEFT" spacing="16">
+                    <Label text="Quantité" style="-fx-font-size: 24px; -fx-font-weight: 900;"/>
+
+                    <Button text="−" onAction="#onMinus"
+                            style="-fx-font-size: 18px; -fx-padding: 8 14; -fx-background-radius: 10;"/>
+                    <Label fx:id="qtyLabel" text="1"
+                           style="-fx-font-size: 22px; -fx-font-weight: 900;"/>
+                    <Button text="+" onAction="#onPlus"
+                            style="-fx-font-size: 18px; -fx-padding: 8 14; -fx-background-radius: 10;"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Button text="Ajouter au panier" onAction="#onAddToCart"
+                            style="-fx-background-color: #fbc02d;
+                                   -fx-font-size: 22px;
+                                   -fx-font-weight: 900;
+                                   -fx-background-radius: 22;
+                                   -fx-padding: 12 26;"/>
+                </HBox>
+
+            </VBox>
+        </HBox>
+    </center>
+
+</BorderPane>

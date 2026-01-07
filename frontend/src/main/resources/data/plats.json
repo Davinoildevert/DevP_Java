@@ -1,0 +1,149 @@
+[
+  {
+    "id": 101,
+    "nom": "Nems poulet",
+    "description": "Nems croustillants au poulet, servis avec sauce maison",
+    "prix": 6.90,
+    "disponible": true,
+    "image": "nems.jpg",
+    "categorieId": 1
+  },
+  {
+    "id": 102,
+    "nom": "Soupe miso",
+    "description": "Soupe miso traditionnelle avec tofu et algues",
+    "prix": 4.50,
+    "disponible": true,
+    "image": "soupe_miso.jpg",
+    "categorieId": 1
+  },
+  {
+    "id": 103,
+    "nom": "Gyozas",
+    "description": "Raviolis japonais grillés, farce porc/légumes",
+    "prix": 7.90,
+    "disponible": true,
+    "image": "gyozas.jpg",
+    "categorieId": 1
+  },
+  {
+    "id": 104,
+    "nom": "Salade wakame",
+    "description": "Salade d’algues wakame assaisonnée",
+    "prix": 5.90,
+    "disponible": true,
+    "image": "wakame.jpg",
+    "categorieId": 1
+  },
+
+  {
+    "id": 201,
+    "nom": "Ramen miso",
+    "description": "Bouillon miso, nouilles, porc, œuf, oignons",
+    "prix": 12.90,
+    "disponible": true,
+    "image": "ramen.jpg",
+    "categorieId": 2
+  },
+  {
+    "id": 202,
+    "nom": "Curry rouge",
+    "description": "Curry rouge thaï, lait de coco, légumes, riz",
+    "prix": 14.50,
+    "disponible": true,
+    "image": "curry.jpg",
+    "categorieId": 2
+  },
+  {
+    "id": 203,
+    "nom": "Pad Thai",
+    "description": "Nouilles sautées, sauce tamarin, cacahuètes, légumes",
+    "prix": 13.50,
+    "disponible": true,
+    "image": "padthay.jpg",
+    "categorieId": 2
+  },
+  {
+    "id": 204,
+    "nom": "Bibimbap",
+    "description": "Riz, légumes, viande, œuf, sauce gochujang",
+    "prix": 15.90,
+    "disponible": true,
+    "image": "bibimbap.jpg",
+    "categorieId": 2
+  },
+
+  {
+    "id": 301,
+    "nom": "Mochi",
+    "description": "Dessert mochi (pâte de riz) cœur gourmand",
+    "prix": 4.90,
+    "disponible": true,
+    "image": "mochi.jpg",
+    "categorieId": 3
+  },
+  {
+    "id": 302,
+    "nom": "Cheesecake",
+    "description": "Cheesecake crémeux, base biscuitée",
+    "prix": 5.50,
+    "disponible": true,
+    "image": "cheesecake.jpg",
+    "categorieId": 3
+  },
+  {
+    "id": 303,
+    "nom": "Perles coco",
+    "description": "Perles coco moelleuses, noix de coco râpée",
+    "prix": 4.50,
+    "disponible": true,
+    "image": "perles_coco.jpg",
+    "categorieId": 3
+  },
+  {
+    "id": 304,
+    "nom": "Dorayaki",
+    "description": "Pancake japonais fourré (haricot rouge / chocolat)",
+    "prix": 4.80,
+    "disponible": true,
+    "image": "dorayaki.jpg",
+    "categorieId": 3
+  },
+
+  {
+    "id": 401,
+    "nom": "Boba thé",
+    "description": "Thé au lait avec perles de tapioca",
+    "prix": 4.50,
+    "disponible": true,
+    "image": "boba.jpg",
+    "categorieId": 4
+  },
+  {
+    "id": 402,
+    "nom": "Soda",
+    "description": "Boisson gazeuse fraîche",
+    "prix": 2.50,
+    "disponible": true,
+    "image": "soda.jpg",
+    "categorieId": 4
+  },
+  {
+    "id": 403,
+    "nom": "Thé vert",
+    "description": "Thé vert chaud traditionnel",
+    "prix": 2.90,
+    "disponible": true,
+    "image": "the_vert.jpg",
+    "categorieId": 4
+  },
+  {
+    "id": 404,
+    "nom": "Eau",
+    "description": "Bouteille d’eau",
+    "prix": 1.50,
+    "disponible": true,
+    "image": "eau.jpg",
+    "categorieId": 4
+  }
+]

@@ -1,0 +1,114 @@
+/* ===== Screen ===== */
+.screen {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #05060B;
+}
+
+/* ===== Background ===== */
+.bgBase {
+    -fx-background-color: linear-gradient(to bottom right, #05060B 0%, #070A14 35%, #0A0F22 70%, #05060B 100%);
+}
+
+/* bokeh-like soft blobs */
+.bgBokeh {
+    -fx-background-color:
+        radial-gradient(center 18% 30%, radius 30%, rgba(0,255,224,0.22), transparent 70%),
+        radial-gradient(center 80% 25%, radius 32%, rgba(255,63,196,0.18), transparent 72%),
+        radial-gradient(center 72% 72%, radius 38%, rgba(255,210,74,0.10), transparent 70%),
+        radial-gradient(center 20% 80%, radius 36%, rgba(120,92,255,0.18), transparent 72%);
+}
+
+/* sweeping neon haze (we animate opacity slightly by code if you want) */
+.bgNeonSweep {
+    -fx-background-color: linear-gradient(to right, rgba(255,63,196,0.10), rgba(0,255,224,0.10), rgba(255,210,74,0.06));
+    -fx-opacity: 0.55;
+}
+
+/* vignette */
+.bgVignette {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 80%, transparent 45%, rgba(0,0,0,0.85) 100%);
+}
+
+/* ===== Panel ===== */
+.panelWrap {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.65), 40, 0.28, 0, 18);
+}
+
+/* neon frame behind the glass (animated via code by changing opacity) */
+.neonFrame {
+    -fx-background-radius: 34;
+    -fx-background-color: linear-gradient(to right, rgba(255,63,196,0.75), rgba(0,255,224,0.75), rgba(255,210,74,0.55));
+    -fx-padding: 3;          /* border thickness feel */
+    -fx-opacity: 0.85;
+    -fx-effect: dropshadow(gaussian, rgba(0,255,224,0.35), 26, 0.25, 0, 0);
+}
+
+/* glass panel itself */
+.glassPanel {
+    -fx-background-radius: 32;
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-border-radius: 32;
+    -fx-border-color: rgba(255,255,255,0.10);
+    -fx-border-width: 1;
+    -fx-padding: 46 60 34 60;
+}
+
+/* ===== Typography ===== */
+.brandTop {
+    -fx-font-size: 64px;
+    -fx-font-weight: 900;
+    -fx-text-fill: rgba(255,255,255,0.92);
+    -fx-letter-spacing: 2px;
+}
+
+.brandBottom {
+    -fx-font-size: 78px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(255,63,196,0.35), 18, 0.25, 0, 0);
+    -fx-letter-spacing: 3px;
+}
+
+.tagline {
+    -fx-font-size: 20px;
+    -fx-text-fill: rgba(255,255,255,0.72);
+}
+
+.subtitle {
+    -fx-font-size: 17px;
+    -fx-text-fill: rgba(255,255,255,0.60);
+}
+
+/* ===== CTA ===== */
+.cta {
+    -fx-font-size: 42px;
+    -fx-font-weight: 900;
+    -fx-padding: 22 70;
+    -fx-background-radius: 28;
+    -fx-text-fill: #0A0B10;
+
+    /* neon gold button */
+    -fx-background-color: linear-gradient(to right, #FFE08A, #FFD24A 45%, #FFB000);
+    -fx-effect: dropshadow(gaussian, rgba(255,210,74,0.35), 26, 0.25, 0, 12);
+}
+
+.cta:hover {
+    -fx-background-color: linear-gradient(to right, #FFF0B8, #FFE08A 45%, #FFD24A);
+}
+
+/* ===== bottom buttons ===== */
+.bottomRow { -fx-padding: 16 0 0 0; }
+
+.chip {
+    -fx-font-size: 20px;
+    -fx-font-weight: 800;
+    -fx-padding: 14 30;
+    -fx-background-radius: 18;
+    -fx-background-color: rgba(255,255,255,0.07);
+    -fx-text-fill: rgba(255,255,255,0.90);
+    -fx-border-color: rgba(255,255,255,0.12);
+    -fx-border-radius: 18;
+}
+.chip:hover {
+    -fx-background-color: rgba(255,255,255,0.10);
+}

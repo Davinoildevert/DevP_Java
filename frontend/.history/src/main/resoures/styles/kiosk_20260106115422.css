@@ -1,0 +1,105 @@
+/* ===== Screen ===== */
+.screen {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #070A10;
+}
+
+/* ===== Background (multi-layer) ===== */
+.bgBase {
+    -fx-background-color: linear-gradient(to bottom right, #060911, #0B1020 40%, #070A10);
+}
+
+.bgGlowRed {
+    -fx-background-color: radial-gradient(center 18% 32%, radius 45%, rgba(255, 36, 78, 0.28), transparent 70%);
+}
+
+.bgGlowGold {
+    -fx-background-color: radial-gradient(center 78% 42%, radius 55%, rgba(245, 197, 66, 0.22), transparent 72%);
+}
+
+/* Seigaiha-like wave pattern (pure CSS using repeating gradients) */
+.bgPattern {
+    -fx-background-color:
+        repeating-radial-gradient(center 50% 50%, radius 12%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.05) 2%, transparent 2.5%, transparent 6%);
+    -fx-opacity: 0.35;
+}
+
+/* Dark vignette */
+.bgVignette {
+    -fx-background-color: radial-gradient(center 50% 50%, radius 80%, transparent 45%, rgba(0,0,0,0.70) 100%);
+}
+
+/* ===== Glass Card ===== */
+.glassCard {
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color: rgba(245,197,66,0.22);
+    -fx-border-width: 1.2;
+    -fx-padding: 42 54 30 54;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 34, 0.26, 0, 16);
+}
+
+/* ===== Typography ===== */
+.brand {
+    -fx-font-size: 72px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #F8FAFC;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 18, 0.25, 0, 6);
+}
+
+.tagline {
+    -fx-font-size: 22px;
+    -fx-text-fill: rgba(248,250,252,0.78);
+}
+
+.subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: rgba(248,250,252,0.66);
+}
+
+/* ===== CTA Button ===== */
+.cta {
+    -fx-font-size: 46px;
+    -fx-font-weight: 900;
+    -fx-padding: 22 68;
+    -fx-background-radius: 28;
+    -fx-background-color: linear-gradient(to right, #F6D365, #F5C542 40%, #F0B429);
+    -fx-text-fill: #0B0F14;
+    -fx-effect: dropshadow(gaussian, rgba(245,197,66,0.30), 24, 0.22, 0, 10);
+}
+
+/* subtle hover */
+.cta:hover {
+    -fx-background-color: linear-gradient(to right, #FFE08A, #F6D365 40%, #F5C542);
+}
+
+/* glossy shine overlay */
+.ctaShine {
+    -fx-fill: linear-gradient(to right,
+        rgba(255,255,255,0.00),
+        rgba(255,255,255,0.18),
+        rgba(255,255,255,0.00)
+    );
+    -fx-opacity: 0.55;
+    -fx-translate-x: -260;
+}
+
+/* ===== Bottom buttons ===== */
+.bottomRow {
+    -fx-padding: 18 0 0 0;
+}
+
+.pill {
+    -fx-font-size: 20px;
+    -fx-font-weight: 800;
+    -fx-padding: 14 30;
+    -fx-background-radius: 20;
+    -fx-background-color: rgba(248,250,252,0.08);
+    -fx-text-fill: rgba(248,250,252,0.92);
+    -fx-border-color: rgba(248,250,252,0.16);
+    -fx-border-radius: 20;
+}
+.pill:hover {
+    -fx-background-color: rgba(248,250,252,0.12);
+}

@@ -1,0 +1,57 @@
+.screen {
+    -fx-background-color: linear-gradient(to bottom right, #0B0F14, #111827);
+    -fx-font-family: "Segoe UI";
+}
+
+.brand {
+    -fx-font-size: 56px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #F8FAFC;
+}
+
+.subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: rgba(248,250,252,0.75);
+}
+
+.cta {
+    -fx-font-size: 40px;
+    -fx-font-weight: 900;
+    -fx-padding: 22 46;
+    -fx-background-radius: 22;
+    -fx-background-color: linear-gradient(to right, #F5C542, #F0B429);
+    -fx-text-fill: #0B0F14;
+}
+
+.ghost {
+    -fx-font-size: 18px;
+    -fx-padding: 12 24;
+    -fx-background-radius: 16;
+    -fx-background-color: rgba(255,255,255,0.08);
+    -fx-text-fill: #F8FAFC;
+    -fx-border-color: rgba(255,255,255,0.15);
+    -fx-border-radius: 16;
+}
+.overlay {
+    -fx-background-color: rgba(0,0,0,0.35);
+}
+
+.langBtn, .helpBtn {
+    -fx-font-size: 18px;
+    -fx-font-weight: 700;
+    -fx-padding: 10 22;
+    -fx-background-radius: 14;
+    -fx-background-color: rgba(255,255,255,0.12);
+    -fx-text-fill: #F8FAFC;
+    -fx-border-color: rgba(255,255,255,0.18);
+    -fx-border-radius: 14;
+}
+
+.langBtn:hover, .helpBtn:hover {
+    -fx-background-color: rgba(255,255,255,0.18);
+}
+
+.langBtn:pressed, .helpBtn:pressed {
+    -fx-opacity: 0.9;
+    -fx-translate-y: 1;
+}

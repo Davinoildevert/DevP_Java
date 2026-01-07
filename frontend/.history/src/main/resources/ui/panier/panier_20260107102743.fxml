@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane fx:id="root"
+           xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.ui.PanierController"
+           prefWidth="1920" prefHeight="1080">
+
+    <!-- ✅ Fond slideshow -->
+    <ImageView fx:id="bgImage"
+               fitWidth="1920" fitHeight="1080"
+               preserveRatio="false"
+               opacity="0.22"
+               mouseTransparent="true"/>
+
+    <!-- ✅ voile léger -->
+    <Region mouseTransparent="true"
+            style="-fx-background-color: rgba(0,0,0,0.25);"/>
+
+    <BorderPane prefWidth="1920" prefHeight="1080"
+                style="-fx-background-color: transparent;">
+
+        <!-- TOP -->
+        <top>
+            <HBox alignment="CENTER" style="-fx-padding: 18 22;">
+                <Label text="Récapitulatif de commande"
+                       style="-fx-font-size: 34px; -fx-font-weight: 900; -fx-text-fill: white;"/>
+            </HBox>
+        </top>
+
+        <!-- CENTER -->
+        <center>
+            <VBox spacing="18" style="-fx-padding: 10 70 30 70;">
+
+                <!-- ✅ CARTE LISTE ARTICLES -->
+                <VBox spacing="12"
+                      style="-fx-background-color: rgba(255,255,255,0.95);
+                             -fx-background-radius: 18;
+                             -fx-padding: 18;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0.2, 0, 8);">
+
+                    <!-- Entête colonnes -->
+                    <GridPane hgap="10" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="55"/>
+                            <ColumnConstraints percentWidth="15"/>
+                            <ColumnConstraints percentWidth="15"/>
+                            <ColumnConstraints percentWidth="15"/>
+                        </columnConstraints>
+
+                        <Label text="Article" style="-fx-font-weight: 800; -fx-font-size: 14px;" GridPane.columnIndex="0"/>
+                        <Label text="Qté"    style="-fx-font-weight: 800; -fx-font-size: 14px;" GridPane.columnIndex="1"/>
+                        <Label text="Prix"   style="-fx-font-weight: 800; -fx-font-size: 14px;" GridPane.columnIndex="2"/>
+                        <Label text="Total"  style="-fx-font-weight: 800; -fx-font-size: 14px;" GridPane.columnIndex="3"/>
+                    </GridPane>
+
+                    <!-- ✅ Items (remplis par le controller) -->
+                    <VBox fx:id="itemsBox" spacing="10"/>
+                </VBox>
+
+                <!-- ✅ ZONE TOTAUX + INPUT -->
+                <HBox spacing="24" alignment="TOP_LEFT">
+
+                    <!-- gauche: champ table/client -->
+                    <VBox spacing="10"
+                          style="-fx-background-color: rgba(255,255,255,0.95);
+                                 -fx-background-radius: 18;
+                                 -fx-padding: 18;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0.2, 0, 8);">
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="Table / Client :" style="-fx-font-size: 18px; -fx-font-weight: 800;"/>
+                            <TextField fx:id="tableClientField" prefWidth="520"/>
+                        </HBox>
+
+                        <Label text="Un numéro de commande sera attribué après confirmation"
+                               style="-fx-text-fill: #666; -fx-font-size: 13px;"/>
+                    </VBox>
+
+                    <!-- droite: sous-total / taxes / total -->
+                    <VBox spacing="10" prefWidth="520"
+                          style="-fx-background-color: rgba(255,255,255,0.95);
+                                 -fx-background-radius: 18;
+                                 -fx-padding: 18;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0.2, 0, 8);">
+
+                        <GridPane hgap="10" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="60"/>
+                                <ColumnConstraints percentWidth="40"/>
+                            </columnConstraints>
+
+                            <Label text="Sous-total" style="-fx-font-size: 16px;" GridPane.columnIndex="0"/>
+                            <Label fx:id="subTotalLabel" text="0,00 €"
+                                   style="-fx-font-size: 16px; -fx-font-weight: 800;"
+                                   GridPane.columnIndex="1"/>
+
+                            <Label text="Taxes (15%)" style="-fx-font-size: 16px;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <Label fx:id="taxLabel" text="0,00 €"
+                                   style="-fx-font-size: 16px; -fx-font-weight: 800;"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        </GridPane>
+
+                        <!-- ✅ total encadré -->
+                        <HBox alignment="CENTER_RIGHT"
+                              style="-fx-border-color: #e53935;
+                                     -fx-border-width: 2;
+                                     -fx-border-radius: 14;
+                                     -fx-padding: 14;">
+                            <Label text="TOTAL :  " style="-fx-font-size: 22px; -fx-font-weight: 900;"/>
+                            <Label fx:id="totalLabel" text="0,00 €"
+                                   style="-fx-font-size: 22px; -fx-font-weight: 900;"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+
+                <!-- ✅ BOUTONS -->
+                <HBox spacing="24" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
+                    <Button text="← Modifier"
+                            onAction="#onModifier"
+                            style="-fx-background-color: white;
+                                   -fx-border-color: #111;
+                                   -fx-border-width: 2;
+                                   -fx-background-radius: 14;
+                                   -fx-border-radius: 14;
+                                   -fx-padding: 14 34;
+                                   -fx-font-size: 16px;
+                                   -fx-font-weight: 800;"/>
+
+                    <Button text="Confirmer →"
+                            onAction="#onConfirmer"
+                            style="-fx-background-color: #2b2b2b;
+                                   -fx-text-fill: white;
+                                   -fx-background-radius: 14;
+                                   -fx-padding: 14 34;
+                                   -fx-font-size: 16px;
+                                   -fx-font-weight: 800;"/>
+                </HBox>
+
+            </VBox>
+        </center>
+
+    </BorderPane>
+</StackPane>

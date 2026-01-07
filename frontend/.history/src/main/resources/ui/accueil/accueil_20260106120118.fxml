@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           prefWidth="1920" prefHeight="1080"
+           styleClass="screen">
+
+    <!-- Background layers -->
+    <StackPane styleClass="bg">
+        <Region styleClass="bgBase"/>
+        <Region styleClass="bgBokeh"/>
+        <Region styleClass="bgNeonSweep"/>
+        <Region styleClass="bgVignette"/>
+    </StackPane>
+
+    <!-- Center glass panel -->
+    <StackPane maxWidth="1200" maxHeight="680" styleClass="panelWrap">
+        <!-- neon border (animated by code) -->
+        <Region styleClass="neonFrame"/>
+
+        <BorderPane styleClass="glassPanel" maxWidth="1200" maxHeight="680">
+            <center>
+                <VBox alignment="CENTER" spacing="18">
+
+                    <Label text="ASIATIK" styleClass="brandTop"/>
+                    <Label text="EXPRESS" styleClass="brandBottom"/>
+
+                    <Label text="Street-food premium • rapide • savoureux"
+                           styleClass="tagline"/>
+
+                    <Button text="TOUCHEZ POUR COMMENCER"
+                            styleClass="cta"/>
+
+                    <Label text="Commandez en quelques étapes. Paiement au comptoir."
+                           styleClass="subtitle"/>
+
+                </VBox>
+            </center>
+
+            <bottom>
+                <HBox alignment="CENTER" spacing="18" styleClass="bottomRow">
+                    <Button text="FR" styleClass="chip"/>
+                    <Button text="EN" styleClass="chip"/>
+                    <Button text="Aide" styleClass="chip"/>
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </StackPane>
+
+</StackPane>

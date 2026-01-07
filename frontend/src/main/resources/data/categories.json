@@ -1,0 +1,6 @@
+[
+  { "id": 1, "nom": "Entrées", "icone": "entrees.png" },
+  { "id": 2, "nom": "Plats", "icone": "plats.png" },
+  { "id": 3, "nom": "Desserts", "icone": "desserts.png" },
+  { "id": 4, "nom": "Boissons", "icone": "boissons.png" }
+]

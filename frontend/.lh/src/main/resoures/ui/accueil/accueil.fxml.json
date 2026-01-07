@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/main/resoures/ui/accueil/accueil.fxml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1767693545398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1767694904664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,25 +1,25 @@\n <?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n \r\n+<?import javafx.scene.layout.StackPane?>\r\n+<?import javafx.scene.layout.VBox?>\r\n+<?import javafx.scene.layout.HBox?>\r\n+<?import javafx.scene.control.Label?>\r\n+<?import javafx.scene.control.Button?>\r\n+\r\n <StackPane xmlns=\"http://javafx.com/javafx\"\r\n            xmlns:fx=\"http://javafx.com/fxml\"\r\n            prefWidth=\"1920\" prefHeight=\"1080\"\r\n            styleClass=\"screen\">\r\n \r\n     <VBox alignment=\"CENTER\" spacing=\"24\">\r\n-\r\n         <Label text=\"Asiatik Express\" styleClass=\"brand\"/>\r\n+        <Button text=\"TOUCHEZ POUR COMMENCER\" styleClass=\"cta\"/>\r\n+        <Label text=\"Commandez vos plats en quelques étapes\" styleClass=\"subtitle\"/>\r\n \r\n-        <Button text=\"TOUCHEZ POUR COMMENCER\"\r\n-                styleClass=\"cta\"/>\r\n-\r\n-        <Label text=\"Commandez vos plats en quelques étapes\"\r\n-               styleClass=\"subtitle\"/>\r\n-\r\n         <HBox spacing=\"16\" alignment=\"CENTER\">\r\n             <Button text=\"FR\" styleClass=\"ghost\"/>\r\n             <Button text=\"EN\" styleClass=\"ghost\"/>\r\n             <Button text=\"Aide\" styleClass=\"ghost\"/>\r\n         </HBox>\r\n-\r\n     </VBox>\r\n </StackPane>\r\n"
+                }
+            ],
+            "date": 1767693545398,
+            "name": "Commit-0",
+            "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<StackPane xmlns=\"http://javafx.com/javafx\"\r\n           xmlns:fx=\"http://javafx.com/fxml\"\r\n           prefWidth=\"1920\" prefHeight=\"1080\"\r\n           styleClass=\"screen\">\r\n\r\n    <VBox alignment=\"CENTER\" spacing=\"24\">\r\n\r\n        <Label text=\"Asiatik Express\" styleClass=\"brand\"/>\r\n\r\n        <Button text=\"TOUCHEZ POUR COMMENCER\"\r\n                styleClass=\"cta\"/>\r\n\r\n        <Label text=\"Commandez vos plats en quelques étapes\"\r\n               styleClass=\"subtitle\"/>\r\n\r\n        <HBox spacing=\"16\" alignment=\"CENTER\">\r\n            <Button text=\"FR\" styleClass=\"ghost\"/>\r\n            <Button text=\"EN\" styleClass=\"ghost\"/>\r\n            <Button text=\"Aide\" styleClass=\"ghost\"/>\r\n        </HBox>\r\n\r\n    </VBox>\r\n</StackPane>\r\n"
+        }
+    ]
+}

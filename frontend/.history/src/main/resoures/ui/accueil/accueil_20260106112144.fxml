@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           prefWidth="1920" prefHeight="1080"
+           styleClass="screen">
+
+    <VBox alignment="CENTER" spacing="24">
+        <Label text="Asiatik Express" styleClass="brand"/>
+        <Button text="TOUCHEZ POUR COMMENCER" styleClass="cta"/>
+        <Label text="Commandez vos plats en quelques étapes" styleClass="subtitle"/>
+
+        <HBox spacing="16" alignment="CENTER">
+            <Button text="FR" styleClass="ghost"/>
+            <Button text="EN" styleClass="ghost"/>
+            <Button text="Aide" styleClass="ghost"/>
+        </HBox>
+    </VBox>
+</StackPane>

@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/main/java/com/example/ui/ProductCard.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1767727814245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1767768381701,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,10 +33,14 @@\n         price.getStyleClass().add(\"productPrice\");\r\n \r\n         Button addBtn = new Button(\"Ajouter\");\r\n         addBtn.getStyleClass().add(\"addBtn\");\r\n-        addBtn.setOnAction(e -> onAdd.accept(product));\r\n+        addBtn.setOnAction(e -> {\r\n+    e.consume();          // ✅ empêche le clic de remonter à la card\r\n+    onAdd.accept(product);\r\n+});\r\n \r\n+\r\n         VBox info = new VBox(10, name, price, addBtn);\r\n         info.setAlignment(Pos.CENTER_LEFT);\r\n \r\n         // Carte\r\n"
+                },
+                {
+                    "date": 1767772492984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,12 @@\n import javafx.scene.control.Button;\r\n import javafx.scene.control.Label;\r\n import javafx.scene.layout.*;\r\n import javafx.scene.shape.Rectangle;\r\n+import javafx.scene.image.Image;\r\n+import javafx.scene.image.ImageView;\r\n \r\n+\r\n import java.util.function.Consumer;\r\n \r\n public class ProductCard {\r\n \r\n@@ -17,12 +20,28 @@\n     public ProductCard(CatalogueController.Product product,\r\n                        Consumer<CatalogueController.Product> onAdd) {\r\n \r\n         // Zone image (placeholder gris)\r\n-        Rectangle imagePlaceholder = new Rectangle(170, 130);\r\n-        imagePlaceholder.getStyleClass().add(\"thumb\");\r\n+        ImageView img = new ImageView();\r\n+img.setFitWidth(170);\r\n+img.setFitHeight(130);\r\n+img.setPreserveRatio(false);\r\n+img.getStyleClass().add(\"thumb\");\r\n \r\n-        StackPane imageBox = new StackPane(imagePlaceholder);\r\n+// charge l'image depuis resources\r\n+var url = getClass().getResource(product.imagePath());\r\n+if (url != null) {\r\n+    img.setImage(new Image(url.toExternalForm()));\r\n+} else {\r\n+    System.out.println(\"❌ Image plat introuvable: \" + product.imagePath());\r\n+}\r\n+\r\n+StackPane imageBox = new StackPane(img);\r\n+imageBox.setMinSize(170, 130);\r\n+imageBox.setMaxSize(170, 130);\r\n+\r\n+\r\n+        \r\n         imageBox.setMinSize(170, 130);\r\n         imageBox.setMaxSize(170, 130);\r\n \r\n         // Texte\r\n"
+                }
+            ],
+            "date": 1767727814245,
+            "name": "Commit-0",
+            "content": "package com.example.ui;\r\n\r\nimport javafx.geometry.Insets;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.layout.*;\r\nimport javafx.scene.shape.Rectangle;\r\n\r\nimport java.util.function.Consumer;\r\n\r\npublic class ProductCard {\r\n\r\n    private final HBox root;\r\n\r\n    public ProductCard(CatalogueController.Product product,\r\n                       Consumer<CatalogueController.Product> onAdd) {\r\n\r\n        // Zone image (placeholder gris)\r\n        Rectangle imagePlaceholder = new Rectangle(170, 130);\r\n        imagePlaceholder.getStyleClass().add(\"thumb\");\r\n\r\n        StackPane imageBox = new StackPane(imagePlaceholder);\r\n        imageBox.setMinSize(170, 130);\r\n        imageBox.setMaxSize(170, 130);\r\n\r\n        // Texte\r\n        Label name = new Label(product.name());\r\n        name.getStyleClass().add(\"productName\");\r\n\r\n        Label price = new Label(String.format(\"%.2f €\", product.price()).replace('.', ','));\r\n        price.getStyleClass().add(\"productPrice\");\r\n\r\n        Button addBtn = new Button(\"Ajouter\");\r\n        addBtn.getStyleClass().add(\"addBtn\");\r\n        addBtn.setOnAction(e -> onAdd.accept(product));\r\n\r\n        VBox info = new VBox(10, name, price, addBtn);\r\n        info.setAlignment(Pos.CENTER_LEFT);\r\n\r\n        // Carte\r\n        root = new HBox(18, imageBox, info);\r\n        root.setAlignment(Pos.CENTER_LEFT);\r\n        root.setPadding(new Insets(18));\r\n        root.getStyleClass().add(\"productCard\");\r\n\r\n        HBox.setHgrow(info, Priority.ALWAYS);\r\n    }\r\n\r\n    public Parent getRoot() {\r\n        return root;\r\n    }\r\n}\r\n"
+        }
+    ]
+}

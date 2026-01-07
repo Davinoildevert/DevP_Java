@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<StackPane fx:id="root"
+           xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.ui.ConfirmationController"
+           prefWidth="1920" prefHeight="1080"
+           styleClass="confirmRoot">
+
+    <VBox alignment="CENTER" spacing="18" styleClass="confirmWrap">
+
+        <!-- Titre -->
+        <Label text="Confirmation de commande" styleClass="confirmTitle"/>
+
+        <!-- Icône succès -->
+        <Label text="✓" styleClass="successIcon"/>
+
+        <!-- Sous-titre -->
+        <Label text="Merci pour votre commande !" styleClass="confirmSubtitle"/>
+
+        <!-- Num commande -->
+        <Label fx:id="orderNumberLabel" text="Commande N° #1234" styleClass="orderNumber"/>
+
+        <!-- Carte récapitulatif -->
+        <VBox styleClass="recapCard" spacing="12">
+            <Label text="Récapitulatif" styleClass="recapTitle"/>
+
+            <!-- Liste produits (remplie en Java) -->
+            <GridPane fx:id="itemsGrid" hgap="12" vgap="10" styleClass="itemsGrid">
+                <!-- Colonnes: gauche = libellé, droite = prix -->
+                <!-- Les lignes seront ajoutées par le controller -->
+            </GridPane>
+
+            <!-- Séparateur visuel -->
+            <Region styleClass="recapDivider"/>
+
+            <!-- Total (aligné comme sur maquette) -->
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Total" styleClass="totalLabel"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="totalLabel" text="41,20 €" styleClass="totalValue"/>
+            </HBox>
+        </VBox>
+
+        <!-- Statut -->
+        <Label text="Veuillez patienter, votre commande est en préparation"
+               styleClass="statusText"/>
+
+        <!-- Bouton CTA -->
+        <Button text="Nouvelle commande" onAction="#onNouvelleCommande" styleClass="ctaYellow"/>
+
+    </VBox>
+</StackPane>

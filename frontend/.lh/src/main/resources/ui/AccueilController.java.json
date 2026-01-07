@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/main/resources/ui/AccueilController.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1767698906666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1767698906666,
+            "name": "Commit-0",
+            "content": "package com.example.ui;\r\n\r\nimport javafx.animation.FadeTransition;\r\nimport javafx.fxml.FXML;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.util.Duration;\r\n\r\nimport java.util.List;\r\n\r\npublic class AccueilController {\r\n\r\n    @FXML\r\n    private ImageView bgImage1;\r\n\r\n    @FXML\r\n    private ImageView bgImage2;\r\n\r\n    private List<Image> images;\r\n    private int index = 0;\r\n    private boolean showingFirst = true;\r\n\r\n    @FXML\r\n    public void initialize() {\r\n\r\n        images = List.of(\r\n                new Image(getClass().getResource(\"/images/backgrounds/bg1.jpg\").toExternalForm()),\r\n                new Image(getClass().getResource(\"/images/backgrounds/bg2.jpg\").toExternalForm()),\r\n                new Image(getClass().getResource(\"/images/backgrounds/bg3.jpg\").toExternalForm())\r\n        );\r\n\r\n        bgImage1.setImage(images.get(0));\r\n        bgImage2.setOpacity(0);\r\n\r\n        startSlideshow();\r\n    }\r\n\r\n    private void startSlideshow() {\r\n\r\n        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1.2),\r\n                showingFirst ? bgImage1 : bgImage2);\r\n\r\n        FadeTransition fadeIn = ExplanationFadeIn();\r\n\r\n        fadeOut.setFromValue(1);\r\n        fadeOut.setToValue(0);\r\n\r\n        fadeOut.setOnFinished(e -> {\r\n            index = (index + 1) % images.size();\r\n\r\n            ImageView next = showingFirst ? bgImage2 : bgImage1;\r\n            next.setImage(images.get(index));\r\n\r\n            fadeIn.play();\r\n            showingFirst = !showingFirst;\r\n        });\r\n\r\n        fadeOut.play();\r\n    }\r\n\r\n    private FadeTransition ExplanationFadeIn() {\r\n        ImageView target = showingFirst ? bgImage2 : bgImage1;\r\n\r\n        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.2), target);\r\n        fadeIn.setFromValue(0);\r\n        fadeIn.setToValue(1);\r\n\r\n        fadeIn.setOnFinished(e -> {\r\n            // délai avant image suivante\r\n            javafx.animation.PauseTransition pause =\r\n                    new javafx.animation.PauseTransition(Duration.seconds(2.0));\r\n            pause.setOnFinished(ev -> startSlideshow());\r\n            pause.play();\r\n        });\r\n\r\n        return fadeIn;\r\n    }\r\n}\r\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/main/java/com/example/ui/NavService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1767769320731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1767769320731,
+            "name": "Commit-0",
+            "content": "package com.example.ui;\r\n\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayDeque;\r\nimport java.util.Deque;\r\n\r\npublic final class NavService {\r\n\r\n    private static final Deque<String> history = new ArrayDeque<>();\r\n\r\n    private NavService() {}\r\n\r\n    // Appeler ça quand tu changes de page\r\n    public static void goTo(Stage stage, String fxmlPath) {\r\n        try {\r\n            // on mémorise la page actuelle\r\n            Parent currentRoot = stage.getScene().getRoot();\r\n            Object marker = currentRoot.getProperties().get(\"fxmlPath\");\r\n            if (marker instanceof String currentPath) {\r\n                history.push(currentPath);\r\n            }\r\n\r\n            FXMLLoader loader = new FXMLLoader(NavService.class.getResource(\"/\" + fxmlPath));\r\n            Parent newRoot = loader.load();\r\n            newRoot.getProperties().put(\"fxmlPath\", fxmlPath);\r\n\r\n            stage.getScene().setRoot(newRoot);\r\n\r\n        } catch (IOException e) {\r\n            System.out.println(\"❌ NavService.goTo impossible: \" + fxmlPath);\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    public static void back(Stage stage, String fallbackFxml) {\r\n        String prev = history.isEmpty() ? fallbackFxml : history.pop();\r\n        goToWithoutPush(stage, prev);\r\n    }\r\n\r\n    private static void goToWithoutPush(Stage stage, String fxmlPath) {\r\n        try {\r\n            FXMLLoader loader = new FXMLLoader(NavService.class.getResource(\"/\" + fxmlPath));\r\n            Parent newRoot = loader.load();\r\n            newRoot.getProperties().put(\"fxmlPath\", fxmlPath);\r\n            stage.getScene().setRoot(newRoot);\r\n\r\n        } catch (IOException e) {\r\n            System.out.println(\"❌ NavService.back impossible: \" + fxmlPath);\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    // À appeler au tout début (quand tu affiches la 1ère page)\r\n    public static void markCurrentRoot(Stage stage, String fxmlPath) {\r\n        stage.getScene().getRoot().getProperties().put(\"fxmlPath\", fxmlPath);\r\n    }\r\n}\r\n"
+        }
+    ]
+}

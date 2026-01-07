@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/main/java/com/example/ui/CartService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1767762899565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1767762899565,
+            "name": "Commit-0",
+            "content": "package com.example.ui;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\nimport java.util.List;\r\n\r\npublic final class CartService {\r\n\r\n    private static final List<CartItem> items = new ArrayList<>();\r\n    private static int orderNumber = 1234;\r\n\r\n    private CartService() {}\r\n\r\n    public static void add(String name, double price) {\r\n        // si existe déjà → qty++\r\n        for (int i = 0; i < items.size(); i++) {\r\n            CartItem it = items.get(i);\r\n            if (it.name().equals(name)) {\r\n                items.set(i, new CartItem(it.name(), it.price(), it.qty() + 1));\r\n                return;\r\n            }\r\n        }\r\n        items.add(new CartItem(name, price, 1));\r\n    }\r\n\r\n    public static boolean isEmpty() {\r\n        return items.isEmpty();\r\n    }\r\n\r\n    public static List<CartItem> getItems() {\r\n        return Collections.unmodifiableList(items);\r\n    }\r\n\r\n    public static double total() {\r\n        double t = 0;\r\n        for (CartItem it : items) t += it.price() * it.qty();\r\n        return t;\r\n    }\r\n\r\n    public static int nextOrderNumber() {\r\n        return orderNumber++;\r\n    }\r\n\r\n    public static void clear() {\r\n        items.clear();\r\n    }\r\n\r\n    public record CartItem(String name, double price, int qty) {}\r\n}\r\n"
+        }
+    ]
+}
