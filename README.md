@@ -110,6 +110,9 @@ Lancer la classe `App.java` depuis l’IDE.
 ##  Projet pédagogique
 Groupe : **DevP_Java**
 
+Commandes
+mvn clean javafx:run
+
 
 
 
