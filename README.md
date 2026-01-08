@@ -1,4 +1,6 @@
  Backend (Javalin)
+
+ 
  Présentation du projet
 Ce dépôt contient le **backend** de l’application *Borne de commande pour restauration asiatique*.
 
@@ -43,6 +45,8 @@ Il est consommé par un **client JavaFX** simulant une borne de commande tactile
 Frontend (JavaFX)
 
 ##  Présentation
+
+
 Ce dépôt contient le **client JavaFX** simulant une borne de commande tactile pour un restaurant asiatique.
 
 L’application permet au client :
