@@ -57,7 +57,7 @@ public class Db {
 
             System.out.println("🌱 Insertion des données initiales...");
 
-            String sql = readResourceFile("/db/seed.sql");
+            String sql = readResourceFile("/seed.sql");
             st.executeUpdate(sql);
 
             System.out.println("✅ Seed terminé");
