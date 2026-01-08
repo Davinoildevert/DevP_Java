@@ -1,0 +1,33 @@
+# ===== Java / Maven =====
+target/
+*.class
+
+# ===== IntelliJ IDEA =====
+.idea/
+*.iml
+out/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Logs =====
+*.log
+
+# ===== JavaFX cache =====
+.javafx/
+
+# ===== Node (au cas où plus tard) =====
+node_modules/
+
+# ===== SQLite =====
+*.db
+*.db-journal
+
+# ===== Env =====
+.env
+*.local
+
+.lh/
+.history/
+.zip
