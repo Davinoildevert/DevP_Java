@@ -110,8 +110,8 @@ public class CatalogueController {
             } else {
                 imagePath = "/images/plats/" + plat.image;
             }
-        }
-        return new Product(plat.nom, plat.prix, imagePath);
+        };
+        return new Product(plat.id,plat.nom, plat.prix, imagePath);
     }
 
     // ===== Navigation =====
@@ -140,7 +140,7 @@ public class CatalogueController {
             Product p = toProduct(plat);
 
             ProductCard card = new ProductCard(p, prod -> {
-                CartService.add(prod.name(), prod.price());
+                CartService.add(prod.id(), prod.name(), prod.price());
                 updateCartTotal();
             });
 
@@ -254,5 +254,6 @@ public class CatalogueController {
     }
 
     // ===== Modèle local conservé pour ne pas casser ProductCard/SelectedProduct (étape suivante) =====
-    public record Product(String name, double price, String imagePath) {}
+    public record Product(int id, String name, double price, String imagePath) {}
+
 }

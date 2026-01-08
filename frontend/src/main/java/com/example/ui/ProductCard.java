@@ -27,13 +27,20 @@ img.setFitHeight(130);
 img.setPreserveRatio(false);
 img.getStyleClass().add("thumb");
 
-// charge l'image depuis resources
-var url = getClass().getResource(product.imagePath());
-if (url != null) {
-    img.setImage(new Image(url.toExternalForm()));
-} else {
-    System.out.println("❌ Image plat introuvable: " + product.imagePath());
-}
+// charge l'image depuis resources (si imagePath existe)
+        String path = product.imagePath();
+        if (path != null && !path.isBlank()) {
+            var url = getClass().getResource(path);
+            if (url != null) {
+                img.setImage(new Image(url.toExternalForm()));
+            } else {
+                System.out.println("❌ Image plat introuvable: " + path);
+            }
+        } else {
+            System.out.println("ℹ️ Aucun chemin d'image pour: " + product.name());
+        }
+
+
 
 StackPane imageBox = new StackPane(img);
 imageBox.setMinSize(170, 130);

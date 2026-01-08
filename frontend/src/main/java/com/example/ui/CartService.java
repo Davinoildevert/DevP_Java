@@ -7,20 +7,21 @@ import java.util.List;
 public final class CartService {
 
     private static final List<CartItem> items = new ArrayList<>();
-    private static int orderNumber = 1234;
 
     private CartService() {}
 
-    public static void add(String name, double price) {
-        // si existe déjà → qty++
+    // ✅ On garde l'id du plat (obligatoire pour le back)
+    public static void add(int platId, String name, double price) {
         for (int i = 0; i < items.size(); i++) {
             CartItem it = items.get(i);
-            if (it.name().equals(name)) {
-                items.set(i, new CartItem(it.name(), it.price(), it.qty() + 1));
+            if (it.platId() == platId) {
+                items.set(i, new CartItem(it.platId(), it.name(), it.price(), it.qty() + 1));
                 return;
             }
         }
-        items.add(new CartItem(name, price, 1));
+        items.add(new CartItem(platId, name, price, 1));
+        System.out.println("🧺 ADD -> id=" + platId + " name=" + name + " price=" + price);
+
     }
 
     public static boolean isEmpty() {
@@ -37,13 +38,15 @@ public final class CartService {
         return t;
     }
 
-    public static int nextOrderNumber() {
-        return orderNumber++;
-    }
-
     public static void clear() {
         items.clear();
     }
+    public static void debugPrint() {
+        System.out.println("=== PANIER ===");
+        for (CartItem it : items) {
+            System.out.println(it);
+        }
+    }
 
-    public record CartItem(String name, double price, int qty) {}
+    public record CartItem(int platId, String name, double price, int qty) {}
 }

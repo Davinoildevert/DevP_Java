@@ -122,7 +122,9 @@ public class DetailController {
         if (p == null) return;
 
         for (int i = 0; i < qty; i++) {
-            CartService.add(p.nom, p.prix);
+            CartService.add(p.id, p.nom, p.prix);
+
+
         }
         updateCartTotal();
     }

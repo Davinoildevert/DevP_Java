@@ -29,8 +29,9 @@ public class ConfirmationController {
     @FXML
     public void initialize() {
         // ✅ Numéro de commande (depuis ton service)
-        int orderNo = CartService.nextOrderNumber();
-        orderNumberLabel.setText("Commande N° #" + orderNo);
+        int orderId = LastOrder.get();
+        orderNumberLabel.setText("Commande n° " + orderId);
+
 
         // ✅ Colonnes GridPane : 1) nom à gauche, 2) prix à droite
         setupGridColumns();
@@ -39,7 +40,7 @@ public class ConfirmationController {
         itemsGrid.getChildren().clear();
 
         int row = 0;
-        for (CartService.CartItem it : CartService.getItems()) {
+        for (CartService.CartItem it : LastOrderSummary.getItems()) {
             Label name = new Label(it.qty() + "x " + it.name());
             name.getStyleClass().add("itemName");
 
@@ -57,7 +58,7 @@ public class ConfirmationController {
         }
 
         // ✅ Total global
-        totalLabel.setText(formatEuro(CartService.total()));
+        totalLabel.setText(formatEuro(LastOrderSummary.getTotal()));
     }
 
     private void setupGridColumns() {
@@ -80,8 +81,10 @@ public class ConfirmationController {
 
     @FXML
     private void onNouvelleCommande() {
+        LastOrderSummary.clear();
         CartService.clear();
-        goTo("ui/accueil/accueil.fxml"); 
+        goTo("ui/accueil/accueil.fxml");
+
     }
 
     private void goTo(String fxmlPath) {

@@ -13,18 +13,22 @@ import java.util.List;
 
 public class ApiMenuService implements MenuService {
 
-    private final String baseUrl;
+    private final String apiBase; // ex: http://localhost:7070/api
     private final HttpClient client = HttpClient.newHttpClient();
     private final ObjectMapper mapper = new ObjectMapper();
 
     public ApiMenuService(String baseUrl) {
-        this.baseUrl = baseUrl;
+        // baseUrl vient de app.properties (http://localhost:7070)
+        // on normalise pour obtenir http://localhost:7070/api
+        String clean = baseUrl;
+        if (clean.endsWith("/")) clean = clean.substring(0, clean.length() - 1);
+        this.apiBase = clean + "/api";
     }
 
     @Override
     public List<Categorie> getCategories() throws Exception {
         HttpRequest req = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "/categories"))
+                .uri(URI.create(apiBase + "/categories"))
                 .GET()
                 .build();
 
@@ -35,7 +39,7 @@ public class ApiMenuService implements MenuService {
     @Override
     public List<Plat> getAllPlats() throws Exception {
         HttpRequest req = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "/plats"))
+                .uri(URI.create(apiBase + "/plats"))
                 .GET()
                 .build();
 
@@ -46,7 +50,7 @@ public class ApiMenuService implements MenuService {
     @Override
     public List<Plat> getPlatsByCategorie(int categorieId) throws Exception {
         HttpRequest req = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "/plats?categorieId=" + categorieId))
+                .uri(URI.create(apiBase + "/plats?categorieId=" + categorieId))
                 .GET()
                 .build();
 

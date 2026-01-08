@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import com.example.config.AppConfig;
 
 
 import java.io.IOException;
@@ -56,6 +57,7 @@ public class PanierController {
         renderItemsAndTotals();
         initBackgroundSlideshow();
         if (confirmOverlay != null) confirmOverlay.setVisible(false);
+        CartService.debugPrint();
 
     }
 
@@ -142,12 +144,38 @@ private void onCancelConfirm() {
 }
 
 @FXML
+
 private void onValidateConfirm() {
     confirmOverlay.setVisible(false);
 
-    // navigation vers confirmation finale
-    goTo("ui/confirmation/confirmation.fxml");
+    try {
+        int orderId;
+
+        // 🔀 selon le mode (mock ou api)
+        if (AppConfig.isApiMode()) {
+            orderId = ApiOrderService.sendOrder(
+                    tableClientField.getText(),
+                    CartService.getItems(),
+                    0.15
+            );
+        } else {
+            // mode mock → ancien comportement
+            orderId = LastOrder.generateMockOrderId();
+
+        }
+
+        LastOrderSummary.capture(); // 👈 capture AVANT clear
+        LastOrder.set(orderId);
+        CartService.clear();
+        goTo("ui/confirmation/confirmation.fxml");
+
+
+    } catch (Exception e) {
+        e.printStackTrace();
+
+    }
 }
+
 
 
 
@@ -218,4 +246,6 @@ private void onValidateConfirm() {
 
         fadeOut.play();
     }
+
+
 }
