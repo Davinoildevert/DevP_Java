@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.HPos?>
 
 <StackPane fx:id="root"
            xmlns="http://javafx.com/javafx"
@@ -22,6 +23,7 @@
     <Region mouseTransparent="true"
             style="-fx-background-color: rgba(0,0,0,0.25);"/>
 
+    <!-- ✅ Contenu principal -->
     <BorderPane prefWidth="1920" prefHeight="1080"
                 style="-fx-background-color: transparent;">
 
@@ -60,6 +62,7 @@
                     </GridPane>
 
                     <!-- ✅ Items (remplis par le controller) -->
+                    <!-- Si tu veux scroller seulement la liste, on peut remplacer ce VBox par un ScrollPane plus tard -->
                     <VBox fx:id="itemsBox" spacing="10"/>
                 </VBox>
 
@@ -99,7 +102,8 @@
                                    style="-fx-font-size: 16px; -fx-font-weight: 800;"
                                    GridPane.columnIndex="1"/>
 
-                            <Label text="Taxes (15%)" style="-fx-font-size: 16px;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                            <Label text="Taxes (15%)" style="-fx-font-size: 16px;"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="1"/>
                             <Label fx:id="taxLabel" text="0,00 €"
                                    style="-fx-font-size: 16px; -fx-font-weight: 800;"
                                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
@@ -141,60 +145,60 @@
                                    -fx-font-weight: 800;"/>
                 </HBox>
 
-              <!-- ===== MODAL CONFIRMATION (centré comme un Alert) ===== -->
-<StackPane fx:id="confirmOverlay"
-           visible="false"
-           managed="false"
-           pickOnBounds="true"
-           StackPane.alignment="CENTER"
-           style="-fx-background-color: rgba(0,0,0,0.55);">
-
-    <!-- la carte -->
-    <VBox spacing="18"
-          alignment="CENTER"
-          StackPane.alignment="CENTER"
-          style="-fx-background-color: white;
-                 -fx-background-radius: 18;
-                 -fx-padding: 28 34;
-                 -fx-min-width: 520;
-                 -fx-max-width: 520;
-                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.30), 30, 0.25, 0, 10);">
-
-        <Label text="Confirmer la commande ?"
-               style="-fx-font-size: 26px; -fx-font-weight: 900;" />
-
-        <Label text="Êtes-vous sûr de vouloir continuer ?"
-               style="-fx-font-size: 16px; -fx-text-fill: #666;" />
-
-        <HBox spacing="16" alignment="CENTER">
-
-            <Button text="Annuler"
-                    onAction="#onCancelConfirm"
-                    style="-fx-background-color: transparent;
-                           -fx-border-color: #cfcfcf;
-                           -fx-border-width: 2;
-                           -fx-border-radius: 12;
-                           -fx-background-radius: 12;
-                           -fx-padding: 10 26;
-                           -fx-font-size: 14px;
-                           -fx-font-weight: 800;" />
-
-            <Button text="Continuer"
-                    onAction="#onValidateConfirm"
-                    style="-fx-background-color: #fbc02d;
-                           -fx-background-radius: 12;
-                           -fx-padding: 10 28;
-                           -fx-font-size: 14px;
-                           -fx-font-weight: 900;" />
-        </HBox>
-    </VBox>
-</StackPane>
-
-
             </VBox>
         </center>
 
     </BorderPane>
+
+    <!-- ✅ MODAL AU-DESSUS DE TOUT (centré) -->
+    <StackPane fx:id="confirmOverlay"
+               visible="false"
+               alignment="CENTER"
+               pickOnBounds="true"
+               style="-fx-background-color: rgba(0,0,0,0.55);"
+               styleClass="clickable"
+    >
+
+        <VBox spacing="18"
+              alignment="CENTER"
+              prefHeight="260"
+              maxHeight="260"
+              StackPane.alignment="CENTER"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 18;
+                     -fx-padding: 28 34;
+                     -fx-min-width: 520;
+                     -fx-max-width: 520;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.30), 30, 0.25, 0, 10);">
+
+            <Label text="Confirmer la commande ?"
+                   style="-fx-font-size: 26px; -fx-font-weight: 900;" />
+
+            <Label text="Êtes-vous sûr de vouloir continuer ?"
+                   style="-fx-font-size: 16px; -fx-text-fill: #666;" />
+
+            <HBox spacing="16" alignment="CENTER">
+                <Button text="Annuler"
+                        onAction="#onCancelConfirm"
+                        style="-fx-background-color: transparent;
+                               -fx-border-color: #cfcfcf;
+                               -fx-border-width: 2;
+                               -fx-border-radius: 12;
+                               -fx-background-radius: 12;
+                               -fx-padding: 10 26;
+                               -fx-font-size: 14px;
+                               -fx-font-weight: 800;" />
+
+                <Button text="Continuer"
+                        onAction="#onValidateConfirm"
+                        style="-fx-background-color: #fbc02d;
+                               -fx-background-radius: 12;
+                               -fx-padding: 10 28;
+                               -fx-font-size: 14px;
+                               -fx-font-weight: 900;" />
+            </HBox>
+
+        </VBox>
+    </StackPane>
+
 </StackPane>
-
-

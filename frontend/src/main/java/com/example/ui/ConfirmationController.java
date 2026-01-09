@@ -28,16 +28,19 @@ public class ConfirmationController {
 
     @FXML
     public void initialize() {
-        // ✅ Numéro de commande (depuis ton service)
-        int orderId = LastOrder.get();
-        orderNumberLabel.setText("Commande n° " + orderId);
 
+        // ✅ Numéro de commande venant du BACKEND (LastOrder)
+        int orderId = LastOrder.get();
+        if (orderNumberLabel != null) {
+            // texte libre : adapte si ton FXML met déjà "Commande N°"
+            orderNumberLabel.setText("Commande N° #" + orderId);
+        }
 
         // ✅ Colonnes GridPane : 1) nom à gauche, 2) prix à droite
         setupGridColumns();
 
-        // ✅ Remplir la liste
-        itemsGrid.getChildren().clear();
+        // ✅ Remplir la liste (depuis LastOrderSummary capturé avant clear)
+        if (itemsGrid != null) itemsGrid.getChildren().clear();
 
         int row = 0;
         for (CartService.CartItem it : LastOrderSummary.getItems()) {
@@ -51,17 +54,19 @@ public class ConfirmationController {
             itemsGrid.add(name, 0, row);
             itemsGrid.add(price, 1, row);
 
-            // prix bien collé à droite
             GridPane.setHalignment(price, HPos.RIGHT);
-
             row++;
         }
 
         // ✅ Total global
-        totalLabel.setText(formatEuro(LastOrderSummary.getTotal()));
+        if (totalLabel != null) {
+            totalLabel.setText(formatEuro(LastOrderSummary.getTotal()));
+        }
     }
 
     private void setupGridColumns() {
+        if (itemsGrid == null) return;
+
         // évite d'ajouter 20 fois si initialize est rappelé
         if (!itemsGrid.getColumnConstraints().isEmpty()) return;
 
@@ -76,15 +81,15 @@ public class ConfirmationController {
     }
 
     private String formatEuro(double v) {
-        return money.format(v) + " €"; // ex: 14,50 €
+        return money.format(v) + " €";
     }
 
     @FXML
     private void onNouvelleCommande() {
+        // ✅ reset propre
         LastOrderSummary.clear();
         CartService.clear();
         goTo("ui/accueil/accueil.fxml");
-
     }
 
     private void goTo(String fxmlPath) {

@@ -27,7 +27,7 @@ import java.util.List;
 public class CatalogueController {
 
     @FXML private StackPane root;
-    @FXML private ImageView bgImage; // ImageView du fond (slideshow)
+    @FXML private ImageView bgImage; // fond slideshow
     @FXML private GridPane grid;
 
     @FXML private Button tabEntrees;
@@ -40,7 +40,7 @@ public class CatalogueController {
 
     private double totalPanier = 0.0;
 
-    // ===== Données (source: mock JSON ou API plus tard) =====
+    // ✅ garde service original (API/mock via factory)
     private final MenuService menuService = MenuServiceFactory.getInstance();
 
     // ===== Slideshow =====
@@ -50,12 +50,9 @@ public class CatalogueController {
 
     @FXML
     public void initialize() {
-        // Par défaut: onglet Plats
-        onPlats();
-
+        onPlats(); // tab par défaut
         totalPanier = CartService.total();
         updateCartTotal();
-
         initBackgroundSlideshow();
     }
 
@@ -63,25 +60,25 @@ public class CatalogueController {
     @FXML
     private void onEntrees() {
         setActiveTab(tabEntrees);
-        showCategory(1); // Entrées
+        showCategory(1);
     }
 
     @FXML
     private void onPlats() {
         setActiveTab(tabPlats);
-        showCategory(2); // Plats
+        showCategory(2);
     }
 
     @FXML
     private void onDesserts() {
         setActiveTab(tabDesserts);
-        showCategory(3); // Desserts
+        showCategory(3);
     }
 
     @FXML
     private void onBoissons() {
         setActiveTab(tabBoissons);
-        showCategory(4); // Boissons
+        showCategory(4);
     }
 
     private void showCategory(int categorieId) {
@@ -94,24 +91,13 @@ public class CatalogueController {
         }
     }
 
-
-    private String getDataSourceLabel() {
-        // petit helper visuel, sans dépendre d'autres classes
-        return "mock";
-    }
-
     private Product toProduct(Plat plat) {
-        // Ton JSON contient "image" (ex: "ramen.jpg").
-        // Ton UI attend un chemin resources genre "/images/plats/ramen.jpg".
         String imagePath = null;
         if (plat.image != null && !plat.image.isBlank()) {
-            if (plat.image.startsWith("/")) {
-                imagePath = plat.image;
-            } else {
-                imagePath = "/images/plats/" + plat.image;
-            }
-        };
-        return new Product(plat.id,plat.nom, plat.prix, imagePath);
+            imagePath = plat.image.startsWith("/") ? plat.image : "/images/plats/" + plat.image;
+        }
+        // ✅ On garde l'ID (indispensable pour envoyer commande au backend)
+        return new Product(plat.id, plat.nom, plat.prix, imagePath);
     }
 
     // ===== Navigation =====
@@ -134,30 +120,29 @@ public class CatalogueController {
     private void showPlats(List<Plat> plats) {
         grid.getChildren().clear();
 
-        for (int i = 0; i < Math.min(4, plats.size()); i++) {
+        // ✅ Fusion: on prend le comportement V2 -> afficher tous les plats (plus limité à 4)
+        for (int i = 0; i < plats.size(); i++) {
             Plat plat = plats.get(i);
-
             Product p = toProduct(plat);
 
             ProductCard card = new ProductCard(p, prod -> {
+                // ✅ logique originale: on garde l'id
                 CartService.add(prod.id(), prod.name(), prod.price());
                 updateCartTotal();
             });
 
-            // clic sur la card -> page détail
+            // clic sur la card -> détail
             card.getRoot().setOnMouseClicked(ev -> openDetail(plat));
 
             grid.add(card.getRoot(), i % 2, i / 2);
         }
     }
 
-
     private void openDetail(Plat plat) {
         SelectedProduct.set(plat);
         Stage stage = (Stage) root.getScene().getWindow();
         NavService.goTo(stage, "ui/detail/detail.fxml");
     }
-
 
     // ===== UI helpers =====
     private void setActiveTab(Button active) {
@@ -173,7 +158,9 @@ public class CatalogueController {
 
     private void updateCartTotal() {
         totalPanier = CartService.total();
-        String txt = String.format("🧺  %.2f €", totalPanier).replace('.', ',');
+
+        // ✅ Fusion: style V2 (sans emoji). Si tu veux garder l’emoji, remets "🧺  ".
+        String txt = String.format("  %.2f €", totalPanier).replace('.', ',');
         cartTotalBtn.setText(txt);
     }
 
@@ -253,7 +240,6 @@ public class CatalogueController {
         }
     }
 
-    // ===== Modèle local conservé pour ne pas casser ProductCard/SelectedProduct (étape suivante) =====
+    // ✅ On garde le modèle ORIGINAL avec id (important)
     public record Product(int id, String name, double price, String imagePath) {}
-
 }

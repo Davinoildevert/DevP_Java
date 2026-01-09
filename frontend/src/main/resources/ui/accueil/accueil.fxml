@@ -7,8 +7,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
 
-<StackPane xmlns="http://javafx.com/javafx"
+
+<StackPane fx:id="root"
+           xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.example.ui.AccueilController"
            styleClass="screen">
@@ -27,7 +30,7 @@
     </StackPane>
 
     <!-- Overlay sombre (ne bloque pas les clics) -->
-    <StackPane styleClass="overlay" mouseTransparent="true"/>
+    <StackPane styleClass="clickable overlay" mouseTransparent="true"/>
 
     <!-- Contenu central : on le met en haut + marge -->
     <VBox alignment="CENTER"
@@ -61,5 +64,58 @@
             <Button fx:id="btnAide" text="Aide" styleClass="helpBtn" onAction="#onAide"/>
         </HBox>
     </VBox>
+
+
+<!-- ✅ MODAL "Fonctionnalité indisponible" -->
+<StackPane fx:id="infoOverlay"
+           visible="false"
+           alignment="CENTER"
+           pickOnBounds="true"
+           style="-fx-background-color: rgba(0,0,0,0.55);">
+
+    <VBox spacing="14"
+          alignment="CENTER"
+          prefHeight="260"
+          maxHeight="260"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 18;
+                 -fx-padding: 22 26;
+                 -fx-min-width: 520;
+                 -fx-max-width: 520;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.30), 30, 0.25, 0, 10);">
+
+        <!-- Header : titre + croix -->
+        <HBox alignment="CENTER_LEFT">
+            <Label fx:id="infoTitleLabel"
+                   text="Information"
+                   style="-fx-font-size: 22px; -fx-font-weight: 900;" />
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button text="✕"
+                    onAction="#onCloseInfo"
+                    style="-fx-background-color: transparent;
+                           -fx-font-size: 18px;
+                           -fx-font-weight: 900;
+                           -fx-text-fill: #111;" />
+        </HBox>
+
+        <Label fx:id="infoMessageLabel"
+               text="Cette fonctionnalité n'est pas encore disponible."
+               wrapText="true"
+               style="-fx-font-size: 16px; -fx-text-fill: #444;" />
+
+        <HBox spacing="12" alignment="CENTER">
+            <Button text="Fermer"
+                    onAction="#onCloseInfo"
+                    style="-fx-background-color: #fbc02d;
+                           -fx-background-radius: 12;
+                           -fx-padding: 10 28;
+                           -fx-font-size: 14px;
+                           -fx-font-weight: 900;" />
+        </HBox>
+
+    </VBox>
+</StackPane>
 
 </StackPane>

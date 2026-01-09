@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ScrollPane?>
+
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
@@ -16,47 +18,61 @@
            prefWidth="1920" prefHeight="1080"
            styleClass="confirmRoot">
 
-    <VBox alignment="CENTER" spacing="18" styleClass="confirmWrap">
+    <ScrollPane fx:id="scroll"
+                fitToWidth="true"
+                vbarPolicy="AS_NEEDED"
+                hbarPolicy="NEVER"
+                styleClass="confirmScroll">
 
-        <!-- Titre -->
-        <Label text="Confirmation de commande" styleClass="confirmTitle"/>
+        <content>
+            <VBox alignment="CENTER"
+                  spacing="18"
+                  styleClass="confirmWrap">
 
-        <!-- Icône succès -->
-        <Label text="✓" styleClass="successIcon"/>
+                <!-- Titre -->
+                <Label text="Confirmation de commande" styleClass="confirmTitle"/>
 
-        <!-- Sous-titre -->
-        <Label text="Merci pour votre commande !" styleClass="confirmSubtitle"/>
+                <!-- Icône succès -->
+                <Label text="✓" styleClass="successIcon"/>
 
-        <!-- Num commande -->
-        <Label fx:id="orderNumberLabel" text="Commande N° #1234" styleClass="orderNumber"/>
+                <!-- Sous-titre -->
+                <Label text="Merci pour votre commande !" styleClass="confirmSubtitle"/>
 
-        <!-- Carte récapitulatif -->
-        <VBox styleClass="recapCard" spacing="12">
-            <Label text="Récapitulatif" styleClass="recapTitle"/>
+                <!-- Num commande -->
+                <Label fx:id="orderNumberLabel"
+                       text="Commande N° #1234"
+                       styleClass="orderNumber"/>
 
-            <!-- Liste produits (remplie en Java) -->
-            <GridPane fx:id="itemsGrid" hgap="12" vgap="10" styleClass="itemsGrid">
-                <!-- Colonnes: gauche = libellé, droite = prix -->
-                <!-- Les lignes seront ajoutées par le controller -->
-            </GridPane>
+                <!-- Carte récapitulatif -->
+                <VBox styleClass="recapCard" spacing="12">
+                    <Label text="Récapitulatif" styleClass="recapTitle"/>
 
-            <!-- Séparateur visuel -->
-            <Region styleClass="recapDivider"/>
+                    <GridPane fx:id="itemsGrid"
+                              hgap="12"
+                              vgap="10"
+                              styleClass="itemsGrid"/>
 
-            <!-- Total (aligné comme sur maquette) -->
-            <HBox alignment="CENTER_LEFT">
-                <Label text="Total" styleClass="totalLabel"/>
-                <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="totalLabel" text="41,20 €" styleClass="totalValue"/>
-            </HBox>
-        </VBox>
+                    <Region styleClass="recapDivider"/>
 
-        <!-- Statut -->
-        <Label text="Veuillez patienter, votre commande est en préparation"
-               styleClass="statusText"/>
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="Total" styleClass="totalLabel"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="totalLabel"
+                               text="41,20 €"
+                               styleClass="totalValue"/>
+                    </HBox>
+                </VBox>
 
-        <!-- Bouton CTA -->
-        <Button text="Nouvelle commande" onAction="#onNouvelleCommande" styleClass="ctaYellow"/>
+                <Label text="Veuillez patienter, votre commande est en préparation"
+                       styleClass="statusText"/>
 
-    </VBox>
+                <Button text="Nouvelle commande"
+                        onAction="#onNouvelleCommande"
+                        styleClass="ctaYellow"/>
+
+            </VBox>
+        </content>
+
+    </ScrollPane>
 </StackPane>
+

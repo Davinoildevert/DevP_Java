@@ -33,27 +33,37 @@
                     <StackPane HBox.hgrow="ALWAYS"/>
 
                     <Button fx:id="cartTotalBtn"
-                            text="🧺  0,00 €"
-                            styleClass="cartTotalBtn"
+                            text=" 0,00 €"
+                            styleClass="cartTotalBtn primaryBtn"
                             onAction="#onOpenPanier"/>
                 </HBox>
 
                 <HBox spacing="14">
-                    <Button fx:id="tabEntrees" text="Entrées" styleClass="tab" onAction="#onEntrees"/>
-                    <Button fx:id="tabPlats" text="Plats" styleClass="tab" onAction="#onPlats"/>
-                    <Button fx:id="tabDesserts" text="Desserts" styleClass="tab" onAction="#onDesserts"/>
-                    <Button fx:id="tabBoissons" text="Boissons" styleClass="tab" onAction="#onBoissons"/>
+                    <Button fx:id="tabEntrees" text="Entrées" styleClass="tab " onAction="#onEntrees"/>
+                    <Button fx:id="tabPlats" text="Plats" styleClass="tab " onAction="#onPlats"/>
+                    <Button fx:id="tabDesserts" text="Desserts" styleClass="tab " onAction="#onDesserts"/>
+                    <Button fx:id="tabBoissons" text="Boissons" styleClass="tab " onAction="#onBoissons"/>
+
                 </HBox>
             </VBox>
         </top>
 
         <center>
+    <ScrollPane fx:id="scroll"
+                fitToWidth="true"
+                hbarPolicy="NEVER"
+                vbarPolicy="AS_NEEDED"
+                styleClass="scrollPane">
+        <content>
             <GridPane fx:id="grid" hgap="26" vgap="26">
                 <padding>
                     <Insets top="18" right="28" bottom="18" left="28"/>
                 </padding>
             </GridPane>
-        </center>
+        </content>
+    </ScrollPane>
+</center>
+
 
         <bottom>
             <HBox alignment="CENTER_LEFT">
@@ -63,7 +73,7 @@
 
                 <Button text="Accueil" styleClass="ghostBtn" onAction="#onBackAccueil"/>
                 <StackPane HBox.hgrow="ALWAYS"/>
-                <Button text="Panier" styleClass="ctaSmall" onAction="#onOpenPanier"/>
+                <Button text="Panier" styleClass="ctaSmall " onAction="#onOpenPanier"/>
             </HBox>
         </bottom>
 

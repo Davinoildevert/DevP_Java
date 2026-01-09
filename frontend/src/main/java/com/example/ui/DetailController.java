@@ -56,7 +56,6 @@ public class DetailController {
     @FXML
     public void initialize() {
 
-        // ✅ Produit sélectionné (maintenant: Plat)
         Plat p = SelectedProduct.get();
 
         if (p != null) {
@@ -64,7 +63,6 @@ public class DetailController {
             if (descLabel != null) descLabel.setText(safe(p.description));
             if (priceLabel != null) priceLabel.setText(formatEuro(p.prix));
 
-            // ✅ Image du plat
             if (productImage != null) {
                 String imagePath = buildImagePath(p.image);
                 if (imagePath != null) {
@@ -80,14 +78,10 @@ public class DetailController {
             System.out.println("⚠️ Aucun plat sélectionné (SelectedProduct.get() == null)");
         }
 
-        // ✅ Quantité
         qty = 1;
         if (qtyLabel != null) qtyLabel.setText(String.valueOf(qty));
 
-        // ✅ Panier total
         updateCartTotal();
-
-        // ✅ Fond animé
         initBackgroundSlideshow();
     }
 
@@ -98,7 +92,6 @@ public class DetailController {
     private String buildImagePath(String imageName) {
         if (imageName == null || imageName.isBlank()) return null;
         if (imageName.startsWith("/")) return imageName;
-        // convention du projet: images des plats dans /images/plats/
         return "/images/plats/" + imageName;
     }
 
@@ -121,10 +114,9 @@ public class DetailController {
         Plat p = SelectedProduct.get();
         if (p == null) return;
 
+        // ✅ On garde l'ID (indispensable pour l'envoi de commande au backend)
         for (int i = 0; i < qty; i++) {
             CartService.add(p.id, p.nom, p.prix);
-
-
         }
         updateCartTotal();
     }
@@ -159,7 +151,6 @@ public class DetailController {
         }
     }
 
-    // ===== Helpers =====
     private void updateCartTotal() {
         if (cartTotalBtn == null) return;
         cartTotalBtn.setText("🧺  " + formatEuro(CartService.total()));

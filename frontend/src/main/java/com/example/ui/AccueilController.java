@@ -5,16 +5,17 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,12 +34,16 @@ public class AccueilController {
     @FXML private ImageView bgBlurB;
     @FXML private ImageView bgMainB;
 
+    // ===== Overlay info (V2) =====
+    @FXML private StackPane infoOverlay;
+    @FXML private Label infoTitleLabel;
+    @FXML private Label infoMessageLabel;
+
     // ===== Bottom buttons =====
     @FXML private Button btnFR;
     @FXML private Button btnEN;
     @FXML private Button btnAide;
 
-    // ✅ AJOUT : bouton Start (doit matcher fx:id="startBtn" dans le FXML)
     @FXML private Button startBtn;
 
     // ===== Slider state =====
@@ -53,15 +58,14 @@ public class AccueilController {
     @FXML
     public void initialize() {
 
-        // ✅ AJOUT (debug + handler forcé + slider derrière)
         System.out.println("✅ AccueilController OK - startBtn=" + startBtn);
 
         if (startBtn != null) {
-            startBtn.setOnAction(this::onStart); // sécurité anti-bug FXML
+            startBtn.setOnAction(this::onStart);
         }
 
         if (sliderPane != null) {
-            sliderPane.toBack(); // bonus : slider derrière
+            sliderPane.toBack();
         }
 
         // Clip (rien ne dépasse)
@@ -90,13 +94,21 @@ public class AccueilController {
         // Première image
         setSlideImage(bgBlurA, bgMainA, images.get(0));
 
-        // Etat initial : FR actif (jaune)
+        // Etat initial : FR actif
         setActive(btnFR);
 
         Platform.runLater(() -> {
             slideB.setTranslateX(safeWidth());
             startSlide();
         });
+
+        // ✅ V2: clic sur le fond pour fermer l’overlay
+        if (infoOverlay != null) {
+            infoOverlay.setVisible(false);
+            infoOverlay.setOnMouseClicked(ev -> {
+                if (ev.getTarget() == infoOverlay) infoOverlay.setVisible(false);
+            });
+        }
     }
 
     // ===== Button logic (active = jaune) =====
@@ -116,16 +128,31 @@ public class AccueilController {
         System.out.println("Langue : FR");
     }
 
+    // ✅ V2: EN affiche overlay info
     @FXML
     private void onEN(ActionEvent e) {
         setActive(btnEN);
-        System.out.println("Langue : EN");
+        showInfo("Indisponible", "Désolé, la version anglaise n'est pas encore disponible.");
     }
 
+    // ✅ V2: Aide affiche overlay info
     @FXML
     private void onAide(ActionEvent e) {
         setActive(btnAide);
-        System.out.println("Aide");
+        showInfo("Aide", "Cette fonctionnalité sera bientôt disponible. Merci de votre compréhension.");
+    }
+
+    private void showInfo(String title, String message) {
+        if (infoTitleLabel != null) infoTitleLabel.setText(title);
+        if (infoMessageLabel != null) infoMessageLabel.setText(message);
+        if (infoOverlay != null) infoOverlay.setVisible(true);
+    }
+
+    // si ton FXML a un bouton fermer (fx:id + onAction="#onCloseInfo")
+    @FXML
+    private void onCloseInfo(ActionEvent e) {
+        if (infoOverlay != null) infoOverlay.setVisible(false);
+        setActive(btnFR); // optionnel
     }
 
     @FXML
@@ -142,13 +169,10 @@ public class AccueilController {
 
         try {
             FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
+            Parent newRoot = loader.load();
 
-            // si jamais e.getSource() n'est pas un Button (par ex. déclenché autrement),
-            // tu peux plutôt prendre startBtn :
             Stage stage = (Stage) ((Button) e.getSource()).getScene().getWindow();
-
-            stage.getScene().setRoot(root);
+            stage.getScene().setRoot(newRoot);
 
             System.out.println("✅ Navigation vers catalogue OK");
         } catch (IOException ex) {

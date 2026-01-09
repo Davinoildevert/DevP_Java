@@ -19,7 +19,6 @@ import javafx.util.Duration;
 
 import com.example.config.AppConfig;
 
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -32,7 +31,6 @@ public class PanierController {
     @FXML private StackPane root;
     @FXML private ImageView bgImage;
     @FXML private StackPane confirmOverlay;
-
 
     @FXML private VBox itemsBox;
 
@@ -57,8 +55,9 @@ public class PanierController {
         renderItemsAndTotals();
         initBackgroundSlideshow();
         if (confirmOverlay != null) confirmOverlay.setVisible(false);
-        CartService.debugPrint();
 
+        // utile pour debug (original)
+        CartService.debugPrint();
     }
 
     private void renderItemsAndTotals() {
@@ -129,60 +128,58 @@ public class PanierController {
     // ===== Boutons =====
     @FXML
     private void onModifier() {
-        // ✅ retourne à la page précédente (catalogue) ou détail selon ton flow
         goTo("ui/catalogue/catalogue.fxml");
     }
 
- @FXML
-private void onConfirmer() {
-    confirmOverlay.setVisible(true);
-}
-
-@FXML
-private void onCancelConfirm() {
-    confirmOverlay.setVisible(false);
-}
-
-@FXML
-
-private void onValidateConfirm() {
-    confirmOverlay.setVisible(false);
-
-    try {
-        int orderId;
-
-        // 🔀 selon le mode (mock ou api)
-        if (AppConfig.isApiMode()) {
-            orderId = ApiOrderService.sendOrder(
-                    tableClientField.getText(),
-                    CartService.getItems(),
-                    0.15
-            );
-        } else {
-            // mode mock → ancien comportement
-            orderId = LastOrder.generateMockOrderId();
-
-        }
-
-        LastOrderSummary.capture(); // 👈 capture AVANT clear
-        LastOrder.set(orderId);
-        CartService.clear();
-        goTo("ui/confirmation/confirmation.fxml");
-
-
-    } catch (Exception e) {
-        e.printStackTrace();
-
+    @FXML
+    private void onConfirmer() {
+        confirmOverlay.setVisible(true);
     }
-}
 
+    @FXML
+    private void onCancelConfirm() {
+        confirmOverlay.setVisible(false);
+    }
 
+    /**
+     * ✅ Fusion : on garde l'envoi commande API (original)
+     * ✅ Et on garde le flow V2 : on part vers l'écran Paiement
+     *
+     * IMPORTANT :
+     * - On NE clear PAS le panier ici (sinon paiement/confirmation n'ont plus de total).
+     * - On clear après paiement OK (dans PaiementController).
+     */
+    @FXML
+    private void onValidateConfirm() {
+        confirmOverlay.setVisible(false);
 
+        try {
+            int orderId;
 
+            if (AppConfig.isApiMode()) {
+                orderId = ApiOrderService.sendOrder(
+                        tableClientField != null ? tableClientField.getText() : "",
+                        CartService.getItems(),
+                        TAX_RATE
+                );
+            } else {
+                orderId = LastOrder.generateMockOrderId();
+            }
 
- 
+            // On capture l'état actuel (si ton Confirmation utilise LastOrderSummary)
+            LastOrderSummary.capture();
 
+            // Stocker l'id retourné par le backend
+            LastOrder.set(orderId);
 
+            // ✅ Flow V2 : passer à l'écran paiement
+            goTo("ui/paiement/paiement.fxml");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // (Optionnel) afficher un message dans l'overlay / toast si tu veux
+        }
+    }
 
     private void goTo(String fxmlPath) {
         try {
@@ -246,6 +243,4 @@ private void onValidateConfirm() {
 
         fadeOut.play();
     }
-
-
 }

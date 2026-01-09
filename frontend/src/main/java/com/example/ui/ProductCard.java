@@ -6,10 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 
 import java.util.function.Consumer;
 
@@ -20,14 +18,14 @@ public class ProductCard {
     public ProductCard(CatalogueController.Product product,
                        Consumer<CatalogueController.Product> onAdd) {
 
-        // Zone image (placeholder gris)
+        // Image
         ImageView img = new ImageView();
-img.setFitWidth(170);
-img.setFitHeight(130);
-img.setPreserveRatio(false);
-img.getStyleClass().add("thumb");
+        img.setFitWidth(170);
+        img.setFitHeight(130);
+        img.setPreserveRatio(false);
+        img.getStyleClass().add("thumb");
 
-// charge l'image depuis resources (si imagePath existe)
+        // ✅ Fusion: on garde le comportement original (safe si imagePath null/vide)
         String path = product.imagePath();
         if (path != null && !path.isBlank()) {
             var url = getClass().getResource(path);
@@ -40,14 +38,7 @@ img.getStyleClass().add("thumb");
             System.out.println("ℹ️ Aucun chemin d'image pour: " + product.name());
         }
 
-
-
-StackPane imageBox = new StackPane(img);
-imageBox.setMinSize(170, 130);
-imageBox.setMaxSize(170, 130);
-
-
-        
+        StackPane imageBox = new StackPane(img);
         imageBox.setMinSize(170, 130);
         imageBox.setMaxSize(170, 130);
 
@@ -61,10 +52,9 @@ imageBox.setMaxSize(170, 130);
         Button addBtn = new Button("Ajouter");
         addBtn.getStyleClass().add("addBtn");
         addBtn.setOnAction(e -> {
-    e.consume();          // ✅ empêche le clic de remonter à la card
-    onAdd.accept(product);
-});
-
+            e.consume();          // empêche le clic de remonter à la card
+            onAdd.accept(product);
+        });
 
         VBox info = new VBox(10, name, price, addBtn);
         info.setAlignment(Pos.CENTER_LEFT);
@@ -74,6 +64,8 @@ imageBox.setMaxSize(170, 130);
         root.setAlignment(Pos.CENTER_LEFT);
         root.setPadding(new Insets(18));
         root.getStyleClass().add("productCard");
+        root.getStyleClass().add("clickable");
+
 
         HBox.setHgrow(info, Priority.ALWAYS);
     }

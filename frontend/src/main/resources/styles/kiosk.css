@@ -97,6 +97,28 @@
     -fx-text-fill: #0B0F14;
 }
 
+/* ===== Bouton menu (≡) ===== */
+.iconBtn {
+    -fx-background-color: rgba(255,255,255,0.15);
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 900;
+    -fx-padding: 6 12;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.iconBtn:hover {
+    -fx-background-color: rgba(255,255,255,0.25);
+}
+
+/* ===== Titre "Menu" ===== */
+.title {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 800;
+}
+
 .addBtn {
     -fx-font-size: 18px;
     -fx-font-weight: 800;
@@ -356,4 +378,92 @@
 }
 .ctaYellow:hover {
     -fx-background-color: #ffd54f;
+}
+
+.scrollPane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.scrollPane .viewport {
+    -fx-background-color: transparent;
+}
+
+.confirmScroll {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.confirmScroll .viewport {
+    -fx-background-color: transparent;
+}
+.itemsScroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.itemsScroll .viewport {
+    -fx-background-color: transparent;
+}
+/* ===== Click feedback (global) ===== */
+
+/* Tous les boutons : hover + pressed */
+.button {
+    -fx-cursor: hand;
+    -fx-transition: all 120ms;
+}
+
+.button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 18, 0.2, 0, 6);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.button:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 10, 0.2, 0, 2);
+}
+
+/* Zones cliquables qui ne sont PAS des boutons (cards, overlays, etc.) */
+.clickable {
+    -fx-cursor: hand;
+}
+
+.clickable:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.20), 18, 0.2, 0, 6);
+}
+
+.clickable:pressed {
+    -fx-scale-x: 0.99;
+    -fx-scale-y: 0.99;
+}
+.tabBtn {
+    -fx-cursor: hand;
+}
+
+.tabBtn:hover {
+    -fx-opacity: 0.92;
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 14, 0.2, 0, 4);
+}
+
+.tabBtn:pressed {
+    -fx-scale-x: 0.99;
+    -fx-scale-y: 0.99;
+}
+.primaryBtn {
+    -fx-cursor: hand;
+}
+
+.primaryBtn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255,180,0,0.35), 20, 0.3, 0, 6);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.primaryBtn:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
 }
