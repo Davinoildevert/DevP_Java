@@ -2,12 +2,15 @@
 
 Backend REST développé en **Java avec Javalin** pour une borne de commande de restaurant, consommé par un client JavaFX.
 
-## En bref — contribution & valeur
+## Ma contribution
 
-- **Développé** une API REST pour centraliser menu, catégories, commandes et paiements simulés.
-- **Connecté** le backend à une base SQLite embarquée afin de conserver les données sans dépendre d’un service externe.
-- **Ajouté** validation des données et codes HTTP adaptés pour fiabiliser les échanges avec le client.
-- **Documenté** les endpoints avec Swagger / OpenAPI afin de faciliter leur test et leur intégration.
+J’étais **chef de projet** : j’ai supervisé l’ensemble du projet tout en participant directement au développement.
+
+- **Supervisé** l’avancement global et la cohérence technique du projet.
+- **Codé** sur le backend et participé aux corrections nécessaires à l’intégration.
+- **Réalisé** la liaison entre le frontend JavaFX et le backend REST.
+- **Mis en place** Swagger / OpenAPI pour documenter et tester les endpoints.
+- **Participé** à la validation des échanges front↔back et à l’intégration de la persistance SQLite.
 
 ## Stack technique
 
