@@ -1,178 +1,103 @@
-# Backend – Borne de commande restaurant (Javalin / Java)
+# Backend — Borne de commande restaurant
 
-Ce dépôt contient le **backend REST** du projet de borne de commande de restaurant.  
-Il est développé en **Java avec Javalin** et expose une API consommée par un client **JavaFX**.
+Backend REST développé en **Java avec Javalin** pour une borne de commande de restaurant, consommé par un client JavaFX.
 
-Le backend gère :
-- le menu (catégories et plats),
-- la création et la consultation des commandes,
-- la simulation du paiement (CB / sans contact),
-- le stockage des données via une base SQLite embarquée.
+## En bref — contribution & valeur
 
----
+- **Développé** une API REST pour centraliser menu, catégories, commandes et paiements simulés.
+- **Connecté** le backend à une base SQLite embarquée afin de conserver les données sans dépendre d’un service externe.
+- **Ajouté** validation des données et codes HTTP adaptés pour fiabiliser les échanges avec le client.
+- **Documenté** les endpoints avec Swagger / OpenAPI afin de faciliter leur test et leur intégration.
 
-## Technologies utilisées
+## Stack technique
 
 - **Java 17+**
-- **Javalin** (serveur HTTP REST)
-- **SQLite** (base de données embarquée)
-- **Jackson** (JSON ↔ objets Java)
-- **Swagger / OpenAPI** (documentation de l’API)
-- **JDBC** (accès base de données)
+- **Javalin**
+- **SQLite**
+- **JDBC**
+- **Jackson**
+- **Swagger / OpenAPI**
+- **JavaFX** côté client
 
----
+## Architecture
 
-## Architecture générale
+- `App.java` — démarrage du serveur et configuration des routes
+- `model/` — objets métier
+- `db/` — connexion SQLite, schéma et seed
+- `service/` — logique applicative
 
-Le projet suit une architecture simple et lisible :
+Le projet reste volontairement léger, sans ORM ni framework lourd.
 
-- `App.java` : point d’entrée de l’application, configuration du serveur et des routes
-- `model` : classes représentant les données métier (Plat, Categorie, OrderRequest…)
-- `db` : gestion de la base SQLite (connexion, création du schéma, seed)
-- `service` : logique applicative (ex : utilisateurs)
-- **Pas de framework lourd** (Spring, Hibernate…), volontairement simple pour la pédagogie
+## Fonctionnalités
 
-La base de données est **initialisée automatiquement au démarrage**.
+### Menu
+- liste des catégories ;
+- liste et détail des plats ;
+- filtrage par catégorie.
 
----
+### Commandes
+- création d’une commande ;
+- consultation d’une commande ;
+- validation des quantités.
 
-## Lancement du serveur
-
-### Prérequis
-- Java installé (Java 17 recommandé)
-
-### Démarrage
-
-```bash
-java -jar backend.jar
-
-## Lancement du serveur
-
-Le backend peut être lancé de deux façons :
-
-### Via un IDE (IntelliJ / VS Code)
-
-- Ouvrir le projet backend
-- Lancer la classe **App**
-
-Le serveur démarre alors à l’adresse suivante :
-
-http://localhost:7070
-
-
----
-
-## Documentation API (Swagger / OpenAPI)
-
-Une documentation automatique de l’API est fournie.
-
-### Swagger UI
-👉 http://localhost:7070/swagger
-
-### Spécification OpenAPI (JSON)
-👉 http://localhost:7070/openapi
-
-Ces pages permettent :
-- de visualiser l’ensemble des endpoints disponibles,
-- de tester les requêtes directement depuis le navigateur,
-- de vérifier les formats de requêtes et de réponses attendus.
-
----
+### Paiement
+- simulation carte bancaire ;
+- simulation sans contact / NFC ;
+- vérification de l’existence de la commande.
 
 ## Endpoints principaux
 
-### Catégories
+```text
+GET  /api/categories
+GET  /api/plats
+GET  /api/plats?categorieId=1
+GET  /api/plats/{id}
+POST /api/commande
+GET  /api/commande/{id}
+POST /api/paiement
+```
 
-- `GET /api/categories`  
-  → retourne la liste des catégories
+## Documentation API
 
----
+Swagger UI :
 
-### Plats
+```text
+http://localhost:7070/swagger
+```
 
-- `GET /api/plats`  
-  → retourne tous les plats
+Spécification OpenAPI :
 
-- `GET /api/plats?categorieId=1`  
-  → retourne les plats d’une catégorie donnée
+```text
+http://localhost:7070/openapi
+```
 
-- `GET /api/plats/{id}`  
-  → retourne le détail d’un plat
+## Lancement
 
----
+### Via IDE
+Lancer la classe `App`.
 
-### Commandes
+### Via JAR
 
-- `POST /api/commande`  
-  → création d’une commande
+```bash
+java -jar backend.jar
+```
 
-- `GET /api/commande/{id}`  
-  → consultation d’une commande par identifiant
+Serveur :
 
----
+```text
+http://localhost:7070
+```
 
-### Paiement (simulation)
+## Persistance
 
-- `POST /api/paiement`  
-  → simulation d’un paiement par carte bancaire ou sans contact (NFC)
+- SQLite locale ;
+- création automatique des tables ;
+- seed automatique si la base est vide.
 
----
+## Compétences démontrées
 
-## Gestion des données
+**Java • REST API • Javalin • SQLite • JDBC • validation backend • OpenAPI • modélisation de données**
 
-- Les données sont stockées dans une **base SQLite locale**
-- Les tables sont **créées automatiquement au démarrage**
-- Un **seed** insère des catégories et des plats si la base est vide
+## Modélisation
 
-⚠️ **Important**  
-En mode API, le frontend affiche **exactement ce que contient la base de données**.  
-La différence avec le mode *mock* du frontend vient du fait que :
-- le mode mock utilise des données fixes,
-- le mode API dépend du contenu réel de la base SQLite.
-
----
-
-## Codes HTTP et validation
-
-L’API respecte les bonnes pratiques REST :
-
-- `200 / 201` : succès
-- `400` : données invalides
-- `404` : ressource inexistante
-- `500` : erreur serveur
-
-Les données sont validées côté backend :
-- quantités strictement positives,
-- commande existante avant paiement,
-- méthode de paiement valide (`CARD` ou `NFC`).
-
----
-
-## Modélisation UML (Modelio)
-
-Une modélisation UML a été réalisée avec **Modelio** :
-
-- diagramme de classes basé sur le backend réel,
-- classes métier principales :
-  - `Categorie`
-  - `Plat`
-  - `Commande`
-  - `LigneCommande`
-  - `Paiement`
-- associations et multiplicités cohérentes avec la base de données et l’API.
-
-Le projet Modelio est fourni dans le dépôt **au format ZIP**.
-
----
-
-## Choix de conception
-
-- Backend volontairement **simple et lisible**
-- Pas de sur-abstraction :
-  - pas de DAO complexes,
-  - pas d’ORM (Hibernate, JPA…)
-- Priorité à la clarté pour une **démo pédagogique**
-- Projet **portable**, fonctionnant sur toute machine et tout IDE
-- Aucun service externe requis (base embarquée)
-
----
+Une modélisation UML a également été réalisée avec Modelio pour représenter les principales classes métier et leurs associations.
